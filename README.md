@@ -16,7 +16,7 @@ Node.js 18.17 or later.
 
 ### Server (Node.js)
 
-- Navigate to server directory `cd client/kilowatt` <br />
+- Navigate to server directory `cd server` <br />
 - Install dependencies: `npm install` or `yarn install` <br />
   - If needed, install nodemon: <br />
     - Globally: `npm install -g nodemon` <br />
