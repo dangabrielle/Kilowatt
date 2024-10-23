@@ -10,7 +10,7 @@
 /coverage
 
 # next.js
-/client/kilowatt/.next/
+/client/.next/
 /out/
 
 # production
