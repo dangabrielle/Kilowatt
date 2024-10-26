@@ -8,11 +8,13 @@ import { OrbitControls } from "@react-three/drei";
 export default function Home() {
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      <Canvas camera={{ position: [-80, 30, 100], fov: 40 }}>
+      <Canvas camera={{ position: [-80, 30, 100], fov: 50 }}>
         <ambientLight intensity={2} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         {/* <Island /> */}
-        <Volcano />
+        <group position={[0, -30, 0]}>
+          <Volcano />
+        </group>
         <OrbitControls />
       </Canvas>
     </div>
