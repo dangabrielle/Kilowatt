@@ -6,16 +6,29 @@ Source: https://sketchfab.com/3d-models/air-conditioning-system-d1367b53a8f541b3
 Title: air conditioning system
 */
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 const AirConditioner = (props) => {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF(
+  const { nodes, materials, scene, animations } = useGLTF(
     "/air_conditioning_system.glb"
   );
   const { actions } = useAnimations(animations, group);
+  useEffect(() => {
+    if (actions) {
+      const firstAction = actions[Object.keys(actions)[0]];
+      if (firstAction) {
+        firstAction.play();
+      }
+    }
+  }, [actions]);
+
   return (
+    //   <mesh>
+    //     <primitive object={scene} />
+    //   </mesh>
+
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
@@ -272,5 +285,5 @@ const AirConditioner = (props) => {
   );
 };
 
-useGLTF.preload("/air_conditioning_system.glb");
+// useGLTF.preload("/air_conditioning_system.glb");
 export default AirConditioner;

@@ -6,13 +6,22 @@ Source: https://sketchfab.com/3d-models/stylized-ceiling-fan-f5941cd91d094877b95
 Title: Stylized Ceiling fan
 */
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 const CeilingFan = (props) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/stylized_ceiling_fan.glb");
   const { actions } = useAnimations(animations, group);
+
+  useEffect(() => {
+    if (actions) {
+      const firstAction = actions[Object.keys(actions)[0]];
+      if (firstAction) {
+        firstAction.play();
+      }
+    }
+  }, [actions]);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
@@ -20,6 +29,7 @@ const CeilingFan = (props) => {
           <group
             name="6174e57527724a1a82ffc9d0deab4a80fbx"
             rotation={[Math.PI / 2, 0, 0]}
+            scale={0.25}
           >
             <group name="Object_2">
               <group name="RootNode">

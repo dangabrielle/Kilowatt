@@ -6,13 +6,22 @@ Source: https://sketchfab.com/3d-models/refrigerator-9eeff266683a464a9a3cc1e6a2f
 Title: Refrigerator
 */
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 const Refrigerator = (props) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/refrigerator.glb");
   const { actions } = useAnimations(animations, group);
+
+  useEffect(() => {
+    if (actions) {
+      const firstAction = actions[Object.keys(actions)[0]];
+      if (firstAction) {
+        firstAction.play();
+      }
+    }
+  }, [actions]);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
