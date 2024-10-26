@@ -12,9 +12,17 @@ import { OrbitControls } from "@react-three/drei";
 export default function Home() {
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw" }}>
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+        }}
+      >
         {" "}
-        <div className="h-1/2 w-full flex flex-row justify-evenly bg-slate-300">
+        <div className=" w-1/2 flex flex-col justify-evenly bg-slate-300">
           <div>
             <Canvas camera={{ position: [0, 0, 5], fov: 100 }}>
               <ambientLight intensity={2} />
@@ -62,12 +70,12 @@ export default function Home() {
             </Canvas>
           </div>
         </div>
-        <div className="fixed h-1/2 bottom-0 left-0 w-full ">
-          <Canvas camera={{ position: [-80, 10, 1], fov: 50 }}>
+        <div className="w-1/2">
+          <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
             <ambientLight intensity={2} />
 
-            <group position={[0, -10, 0]}>
-              <directionalLight position={[5, 10, 5]} intensity={1.2} />
+            <group position={[0, -10, 0]} scale={0.7}>
+              <directionalLight position={[5, 10, 5]} intensity={1} />
               <Volcano />
             </group>
             <OrbitControls />
