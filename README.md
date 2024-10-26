@@ -9,7 +9,7 @@ Node.js 18.17 or later.
 
 ### Client (Next.js)
 
-- Navigate to client directory: `cd client/kilowatt` <br />
+- Navigate to client directory: `cd client` <br />
 - Install dependencies: `npm install` or `yarn install` <br />
 - Start development server: `npm run dev` <br />
 - Open browser to `http://localhost:3000`
