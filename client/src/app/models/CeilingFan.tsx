@@ -8,8 +8,9 @@ Title: Stylized Ceiling fan
 
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { Mesh } from "three/src/Three.js";
 
-const CeilingFan = (props) => {
+const CeilingFan = (props: any) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/stylized_ceiling_fan.glb");
   const { actions } = useAnimations(animations, group);
@@ -42,14 +43,16 @@ const CeilingFan = (props) => {
                     name="Ceiling_fan_CeilingfanMat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Ceiling_fan_CeilingfanMat_0.geometry}
+                    geometry={
+                      (nodes.Ceiling_fan_CeilingfanMat_0 as Mesh).geometry
+                    }
                     material={materials.CeilingfanMat}
                   />
                   <mesh
                     name="Ceiling_fan_Outline_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Ceiling_fan_Outline_0.geometry}
+                    geometry={(nodes.Ceiling_fan_Outline_0 as Mesh).geometry}
                     material={materials.Outline}
                   />
                   <group name="Fans">
@@ -57,14 +60,14 @@ const CeilingFan = (props) => {
                       name="Fans_CeilingfanMat_0"
                       castShadow
                       receiveShadow
-                      geometry={nodes.Fans_CeilingfanMat_0.geometry}
+                      geometry={(nodes.Fans_CeilingfanMat_0 as Mesh).geometry}
                       material={materials.CeilingfanMat}
                     />
                     <mesh
                       name="Fans_Outline_0"
                       castShadow
                       receiveShadow
-                      geometry={nodes.Fans_Outline_0.geometry}
+                      geometry={(nodes.Fans_Outline_0 as Mesh).geometry}
                       material={materials.Outline}
                     />
                   </group>
@@ -78,14 +81,14 @@ const CeilingFan = (props) => {
                     name="Ceiling_CeilingMat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Ceiling_CeilingMat_0.geometry}
+                    geometry={(nodes.Ceiling_CeilingMat_0 as Mesh).geometry}
                     material={materials.CeilingMat}
                   />
                   <mesh
                     name="Ceiling_Outline_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Ceiling_Outline_0.geometry}
+                    geometry={(nodes.Ceiling_Outline_0 as Mesh).geometry}
                     material={materials.Outline}
                   />
                 </group>

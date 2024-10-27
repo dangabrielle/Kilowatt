@@ -9,7 +9,7 @@ Title: GE Profile Double Oven Electric Range
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-const ElectricOven = (props) => {
+const ElectricOven = (props: any) => {
   const { scene, nodes, materials } = useGLTF(
     "/ge_profile_double_oven_electric_range.glb"
   );

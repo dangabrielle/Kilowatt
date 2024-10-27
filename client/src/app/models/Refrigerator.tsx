@@ -8,8 +8,9 @@ Title: Refrigerator
 
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { Mesh } from "three/src/Three.js";
 
-const Refrigerator = (props) => {
+const Refrigerator = (props: any) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/refrigerator.glb");
   const { actions } = useAnimations(animations, group);
@@ -33,28 +34,28 @@ const Refrigerator = (props) => {
                   name="Object_4"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_4.geometry}
+                  geometry={(nodes.Object_4 as Mesh).geometry}
                   material={materials.mainc}
                 />
                 <mesh
                   name="Object_5"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_5.geometry}
+                  geometry={(nodes.Object_5 as Mesh).geometry}
                   material={materials.plastic01}
                 />
                 <mesh
                   name="Object_6"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_6.geometry}
+                  geometry={(nodes.Object_6 as Mesh).geometry}
                   material={materials.wihte}
                 />
                 <mesh
                   name="Object_7"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_7.geometry}
+                  geometry={(nodes.Object_7 as Mesh).geometry}
                   material={materials.glass}
                 />
               </group>
@@ -63,21 +64,21 @@ const Refrigerator = (props) => {
                   name="Object_9"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_9.geometry}
+                  geometry={(nodes.Object_9 as Mesh).geometry}
                   material={materials.mainc}
                 />
                 <mesh
                   name="Object_10"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_10.geometry}
+                  geometry={(nodes.Object_10 as Mesh).geometry}
                   material={materials.plastic01}
                 />
                 <mesh
                   name="Object_11"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_11.geometry}
+                  geometry={(nodes.Object_11 as Mesh).geometry}
                   material={materials.wihte}
                 />
               </group>
@@ -86,28 +87,28 @@ const Refrigerator = (props) => {
                   name="Object_13"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_13.geometry}
+                  geometry={(nodes.Object_13 as Mesh).geometry}
                   material={materials.mainc}
                 />
                 <mesh
                   name="Object_14"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_14.geometry}
+                  geometry={(nodes.Object_14 as Mesh).geometry}
                   material={materials.plastic01}
                 />
                 <mesh
                   name="Object_15"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_15.geometry}
+                  geometry={(nodes.Object_15 as Mesh).geometry}
                   material={materials.wihte}
                 />
                 <mesh
                   name="Object_16"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_16.geometry}
+                  geometry={(nodes.Object_16 as Mesh).geometry}
                   material={materials.glass}
                 />
               </group>
@@ -116,28 +117,28 @@ const Refrigerator = (props) => {
                   name="Object_18"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_18.geometry}
+                  geometry={(nodes.Object_18 as Mesh).geometry}
                   material={materials.mainc}
                 />
                 <mesh
                   name="Object_19"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_19.geometry}
+                  geometry={(nodes.Object_19 as Mesh).geometry}
                   material={materials.plastic01}
                 />
                 <mesh
                   name="Object_20"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_20.geometry}
+                  geometry={(nodes.Object_20 as Mesh).geometry}
                   material={materials.wihte}
                 />
                 <mesh
                   name="Object_21"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_21.geometry}
+                  geometry={(nodes.Object_21 as Mesh).geometry}
                   material={materials.glass}
                 />
               </group>
@@ -146,28 +147,28 @@ const Refrigerator = (props) => {
                   name="Object_23"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_23.geometry}
+                  geometry={(nodes.Object_23 as Mesh).geometry}
                   material={materials.mainc}
                 />
                 <mesh
                   name="Object_24"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_24.geometry}
+                  geometry={(nodes.Object_24 as Mesh).geometry}
                   material={materials.plastic01}
                 />
                 <mesh
                   name="Object_25"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_25.geometry}
+                  geometry={(nodes.Object_25 as Mesh).geometry}
                   material={materials.wihte}
                 />
                 <mesh
                   name="Object_26"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_26.geometry}
+                  geometry={(nodes.Object_26 as Mesh).geometry}
                   material={materials.glass}
                 />
               </group>
@@ -176,28 +177,28 @@ const Refrigerator = (props) => {
                   name="Object_28"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_28.geometry}
+                  geometry={(nodes.Object_28 as Mesh).geometry}
                   material={materials.mainc}
                 />
                 <mesh
                   name="Object_29"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_29.geometry}
+                  geometry={(nodes.Object_29 as Mesh).geometry}
                   material={materials.plastic01}
                 />
                 <mesh
                   name="Object_30"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_30.geometry}
+                  geometry={(nodes.Object_30 as Mesh).geometry}
                   material={materials.wihte}
                 />
                 <mesh
                   name="Object_31"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_31.geometry}
+                  geometry={(nodes.Object_31 as Mesh).geometry}
                   material={materials.glass}
                 />
               </group>
@@ -206,21 +207,21 @@ const Refrigerator = (props) => {
                   name="Object_33"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_33.geometry}
+                  geometry={(nodes.Object_33 as Mesh).geometry}
                   material={materials.wihte}
                 />
                 <mesh
                   name="Object_34"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_34.geometry}
+                  geometry={(nodes.Object_34 as Mesh).geometry}
                   material={materials.glass}
                 />
                 <mesh
                   name="Object_35"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_35.geometry}
+                  geometry={(nodes.Object_35 as Mesh).geometry}
                   material={materials.inside}
                 />
               </group>
@@ -229,7 +230,7 @@ const Refrigerator = (props) => {
                   name="Object_37"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_37.geometry}
+                  geometry={(nodes.Object_37 as Mesh).geometry}
                   material={materials.glass}
                 />
               </group>
@@ -238,28 +239,28 @@ const Refrigerator = (props) => {
                   name="Object_39"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_39.geometry}
+                  geometry={(nodes.Object_39 as Mesh).geometry}
                   material={materials.mainc}
                 />
                 <mesh
                   name="Object_40"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_40.geometry}
+                  geometry={(nodes.Object_40 as Mesh).geometry}
                   material={materials.plastic01}
                 />
                 <mesh
                   name="Object_41"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_41.geometry}
+                  geometry={(nodes.Object_41 as Mesh).geometry}
                   material={materials.wihte}
                 />
                 <mesh
                   name="Object_42"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_42.geometry}
+                  geometry={(nodes.Object_42 as Mesh).geometry}
                   material={materials.glass}
                 />
               </group>

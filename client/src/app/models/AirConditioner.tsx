@@ -8,8 +8,9 @@ Title: air conditioning system
 
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { Mesh } from "three/src/Three.js";
 
-const AirConditioner = (props) => {
+const AirConditioner = (props: any) => {
   const group = useRef();
   const { nodes, materials, scene, animations } = useGLTF(
     "/air_conditioning_system.glb"
@@ -39,7 +40,7 @@ const AirConditioner = (props) => {
                   name="Object_4"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_4.geometry}
+                  geometry={(nodes.Object_4 as Mesh).geometry}
                   material={materials.body}
                 />
               </group>
@@ -48,7 +49,7 @@ const AirConditioner = (props) => {
                   name="Object_6"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_6.geometry}
+                  geometry={(nodes.Object_6 as Mesh).geometry}
                   material={materials["Material.001"]}
                 />
               </group>
@@ -57,7 +58,7 @@ const AirConditioner = (props) => {
                   name="Object_8"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_8.geometry}
+                  geometry={(nodes.Object_8 as Mesh).geometry}
                   material={materials.body}
                 />
               </group>
@@ -66,7 +67,7 @@ const AirConditioner = (props) => {
                   name="Object_10"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_10.geometry}
+                  geometry={(nodes.Object_10 as Mesh).geometry}
                   material={materials.body}
                 />
               </group>
@@ -75,7 +76,7 @@ const AirConditioner = (props) => {
                   name="Object_12"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_12.geometry}
+                  geometry={(nodes.Object_12 as Mesh).geometry}
                   material={materials.cover}
                 />
               </group>
@@ -89,7 +90,7 @@ const AirConditioner = (props) => {
                   name="Object_14"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_14.geometry}
+                  geometry={(nodes.Object_14 as Mesh).geometry}
                   material={materials.cover}
                 />
               </group>
@@ -103,7 +104,7 @@ const AirConditioner = (props) => {
                   name="Object_16"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_16.geometry}
+                  geometry={(nodes.Object_16 as Mesh).geometry}
                   material={materials.cover}
                 />
               </group>
@@ -117,7 +118,7 @@ const AirConditioner = (props) => {
                   name="Object_18"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_18.geometry}
+                  geometry={(nodes.Object_18 as Mesh).geometry}
                   material={materials.cover}
                 />
               </group>
@@ -131,7 +132,7 @@ const AirConditioner = (props) => {
                   name="Object_20"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_20.geometry}
+                  geometry={(nodes.Object_20 as Mesh).geometry}
                   material={materials.cover}
                 />
               </group>
@@ -140,7 +141,7 @@ const AirConditioner = (props) => {
                   name="Object_22"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_22.geometry}
+                  geometry={(nodes.Object_22 as Mesh).geometry}
                   material={materials.market}
                 />
               </group>
@@ -149,7 +150,7 @@ const AirConditioner = (props) => {
                   name="Object_24"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_24.geometry}
+                  geometry={(nodes.Object_24 as Mesh).geometry}
                   material={materials.material}
                 />
                 <group name="Plane006_12" position={[0, 0, -0.28]}>
@@ -157,7 +158,7 @@ const AirConditioner = (props) => {
                     name="Object_26"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Object_26.geometry}
+                    geometry={(nodes.Object_26 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -170,7 +171,7 @@ const AirConditioner = (props) => {
                     name="Object_28"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Object_28.geometry}
+                    geometry={(nodes.Object_28 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -183,7 +184,7 @@ const AirConditioner = (props) => {
                     name="Object_30"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Object_30.geometry}
+                    geometry={(nodes.Object_30 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -196,7 +197,7 @@ const AirConditioner = (props) => {
                     name="Object_32"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Object_32.geometry}
+                    geometry={(nodes.Object_32 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -206,7 +207,7 @@ const AirConditioner = (props) => {
                   name="Object_34"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_34.geometry}
+                  geometry={(nodes.Object_34 as Mesh).geometry}
                   material={materials.cover}
                 />
               </group>
@@ -220,7 +221,7 @@ const AirConditioner = (props) => {
                   name="Object_36"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_36.geometry}
+                  geometry={(nodes.Object_36 as Mesh).geometry}
                   material={materials.Material}
                 />
               </group>
@@ -233,7 +234,7 @@ const AirConditioner = (props) => {
                   name="Object_38"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_38.geometry}
+                  geometry={(nodes.Object_38 as Mesh).geometry}
                   material={materials.Material}
                 />
               </group>
@@ -246,7 +247,7 @@ const AirConditioner = (props) => {
                   name="Object_40"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_40.geometry}
+                  geometry={(nodes.Object_40 as Mesh).geometry}
                   material={materials.Material}
                 />
               </group>
@@ -260,7 +261,7 @@ const AirConditioner = (props) => {
                   name="Object_42"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_42.geometry}
+                  geometry={(nodes.Object_42 as Mesh).geometry}
                   material={materials.cover}
                 />
               </group>
@@ -273,7 +274,7 @@ const AirConditioner = (props) => {
                   name="Object_44"
                   castShadow
                   receiveShadow
-                  geometry={nodes.Object_44.geometry}
+                  geometry={(nodes.Object_44 as Mesh).geometry}
                   material={materials.market}
                 />
               </group>
