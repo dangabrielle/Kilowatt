@@ -10,137 +10,13 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 const ElectricOven = (props: any) => {
-  const { scene, nodes, materials } = useGLTF(
-    "/ge_profile_double_oven_electric_range.glb"
-  );
+  const { scene } = useGLTF("/ge_profile_double_oven_electric_range.glb");
   return (
     <>
       <mesh>
         <primitive object={scene} />
       </mesh>
     </>
-    // <group {...props} dispose={null}>
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh1_Metal_Corrogated_Shiny_0.geometry}
-    //     material={materials.Metal_Corrogated_Shiny}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh2__CorrogateShiny__0.geometry}
-    //     material={materials.CorrogateShiny}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh2__3_0.geometry}
-    //     material={materials.material}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh3__3_0.geometry}
-    //     material={materials.material}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh3__CorrogateShiny__0.geometry}
-    //     material={materials.CorrogateShiny}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh4__3_0.geometry}
-    //     material={materials.material}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh4__CorrogateShiny__0.geometry}
-    //     material={materials.CorrogateShiny}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh5_Metal_Corrogated_Shiny_0.geometry}
-    //     material={materials.Metal_Corrogated_Shiny}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh6__2_0.geometry}
-    //     material={materials.material_3}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh6_Metal_Corrogated_Shiny_0.geometry}
-    //     material={materials.Metal_Corrogated_Shiny}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh6__12_0.geometry}
-    //     material={materials.material_4}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh6__3_0.geometry}
-    //     material={materials.material}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh6__CorrogateShiny__0.geometry}
-    //     material={materials.CorrogateShiny}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh7__9_0.geometry}
-    //     material={materials.material_5}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh8__9_0.geometry}
-    //     material={materials.material_5}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh8__3_0.geometry}
-    //     material={materials.material}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh9__9_0.geometry}
-    //     material={materials.material_5}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh9__2_0.geometry}
-    //     material={materials.material_3}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh9__3_0.geometry}
-    //     material={materials.material}
-    //   />
-    //   <mesh
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Mesh9_Metal_Corrogated_Shiny_0.geometry}
-    //     material={materials.Metal_Corrogated_Shiny}
-    //   />
-    // </group>
   );
 };
 
