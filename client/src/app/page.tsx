@@ -8,6 +8,8 @@ import Refrigerator from "../app/models/Refrigerator";
 import CeilingFan from "../app/models/CeilingFan";
 import ElectricOven from "../app/models/ElectricOven";
 import { OrbitControls } from "@react-three/drei";
+import ProgressBar from "./components/ProgressBar";
+import AirConditionerScene from "./components/AirConditionerScene";
 
 export default function Home() {
   return (
@@ -22,17 +24,9 @@ export default function Home() {
         }}
       >
         {" "}
-        <div className=" w-1/2 flex flex-col justify-evenly bg-slate-300">
+        <div className=" w-1/3 flex flex-col justify-evenly bg-slate-300">
           <div>
-            <Canvas camera={{ position: [0, 0, 5], fov: 100 }}>
-              <ambientLight intensity={2} />
-              <directionalLight position={[10, 10, 10]} intensity={8} />
-              {/* <group position={[0, 0, 0]}> */}
-              <AirConditioner />
-              {/* </group> */}
-
-              <OrbitControls />
-            </Canvas>
+            <AirConditionerScene />
           </div>
           <div>
             <Canvas camera={{ position: [-30, 0, 70], fov: 60 }}>
@@ -42,7 +36,7 @@ export default function Home() {
               <Refrigerator />
               {/* </group> */}
 
-              <OrbitControls />
+              {/* <OrbitControls /> */}
             </Canvas>
           </div>
           <div>
@@ -53,7 +47,7 @@ export default function Home() {
               <CeilingFan />
               {/* </group> */}
 
-              <OrbitControls />
+              {/* <OrbitControls /> */}
             </Canvas>
           </div>
 
@@ -66,11 +60,11 @@ export default function Home() {
                 {/* Move ElectricOven 2 units to the left */}
                 <ElectricOven />
               </group>
-              <OrbitControls />
+              {/* <OrbitControls /> */}
             </Canvas>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="w-2/3">
           <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
             <ambientLight intensity={2} />
 
@@ -78,7 +72,7 @@ export default function Home() {
               <directionalLight position={[5, 10, 5]} intensity={1} />
               <Volcano />
             </group>
-            <OrbitControls />
+            {/* <OrbitControls /> */}
           </Canvas>
         </div>
       </div>
