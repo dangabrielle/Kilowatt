@@ -20,9 +20,9 @@ const ProgressBar = ({ sampleRate = 100, totalDuration = 5000 }) => {
     return () => clearInterval(intervalId);
   }, [sampleRate, totalDuration]);
   return (
-    <div className="relative w-10 h-20 bg-gray-200 rounded-full overflow-hidden">
+    <div className="relative w-10 h-full  bg-gray-200 rounded-full overflow-hidden">
       <motion.div
-        className="absolute bottom-0 w-full z-0 bg-green-500"
+        className="absolute bottom-0 w-full h-full z-0 bg-green-500"
         style={{ height: `${progress}%` }}
         initial={{ height: 0 }}
         animate={{ height: `${progress}%` }}

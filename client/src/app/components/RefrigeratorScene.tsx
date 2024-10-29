@@ -1,17 +1,16 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
+import Refrigerator from "../models/Refrigerator";
 import { Canvas } from "@react-three/fiber";
-import AirConditioner from "../models/AirConditioner";
-
-const AirConditionerScene = () => {
+const RefrigeratorScene = () => {
   return (
-    <div className="flex h-full flex-row items-center justify-evenly content-center">
+    <div className="flex flex-row h-full items-center justify-evenly content-center">
       <div className="w-1/2 flex items-center">
-        <Canvas camera={{ position: [0, 0, 4], fov: 60 }}>
+        <Canvas camera={{ position: [-30, 0, 40], fov: 50 }}>
           <ambientLight intensity={2} />
           <directionalLight position={[10, 10, 10]} intensity={8} />
-          <group position={[0, -1, 0]}>
-            <AirConditioner />
+          <group position={[-2, 10, 0]}>
+            <Refrigerator />
           </group>
         </Canvas>
       </div>
@@ -22,4 +21,4 @@ const AirConditionerScene = () => {
   );
 };
 
-export default AirConditionerScene;
+export default RefrigeratorScene;
