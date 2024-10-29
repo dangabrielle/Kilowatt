@@ -10,6 +10,9 @@ import ElectricOven from "../app/models/ElectricOven";
 import { OrbitControls } from "@react-three/drei";
 import ProgressBar from "./components/ProgressBar";
 import AirConditionerScene from "./components/AirConditionerScene";
+import RefrigeratorScene from "./components/RefrigeratorScene";
+import CeilingFanScene from "./components/CeilingFanScene";
+import ElectricOvenScene from "./components/ElectricOvenScene";
 
 export default function Home() {
   return (
@@ -24,47 +27,25 @@ export default function Home() {
         }}
       >
         {" "}
-        <div className=" w-1/3 flex flex-col justify-evenly bg-slate-300">
-          <div>
-            <AirConditionerScene />
-          </div>
-          <div>
-            <Canvas camera={{ position: [-30, 0, 70], fov: 60 }}>
-              <ambientLight intensity={2} />
-              <directionalLight position={[10, 10, 10]} intensity={8} />
-              {/* <group position={[0, 0, 0]}> */}
-              <Refrigerator />
-              {/* </group> */}
+        <div className="w-1/2 flex h-full flex-row items-center justify-evenly bg-slate-300">
+          <div className="w-1/2 h-full flex flex-col justify-evenly">
+            <div>
+              <AirConditionerScene />
+            </div>
+            <div>
+              <RefrigeratorScene />
+            </div>
+            <div>
+              <CeilingFanScene />
+            </div>
 
-              {/* <OrbitControls /> */}
-            </Canvas>
+            <div>
+              <ElectricOvenScene />
+            </div>
           </div>
-          <div>
-            <Canvas camera={{ position: [0, -200, 500], fov: 60 }}>
-              <ambientLight intensity={2} />
-              <directionalLight position={[10, 10, 10]} intensity={8} />
-              {/* <group position={[0, 0, 0]}> */}
-              <CeilingFan />
-              {/* </group> */}
-
-              {/* <OrbitControls /> */}
-            </Canvas>
-          </div>
-
-          <div>
-            <Canvas camera={{ position: [1, 0.5, 1], fov: 70 }}>
-              <ambientLight intensity={1} />
-              <directionalLight position={[10, 0, 10]} intensity={1} />
-
-              <group position={[-0.5, -0.5, -0.5]}>
-                {/* Move ElectricOven 2 units to the left */}
-                <ElectricOven />
-              </group>
-              {/* <OrbitControls /> */}
-            </Canvas>
-          </div>
+          <div className="w-1/2"></div>
         </div>
-        <div className="w-2/3">
+        <div className="w-1/2">
           <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
             <ambientLight intensity={2} />
 
