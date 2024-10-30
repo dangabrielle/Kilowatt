@@ -144,6 +144,7 @@ const Volcano = (props: any) => {
         material={materials.Volcano_Base}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.5}
+        
       />
     </group>
   );

@@ -8,9 +8,17 @@ Title: Modern Ceiling Light Fixture
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 
 const CeilingLight = (props) => {
   const { nodes, materials } = useGLTF("/modern_ceiling_light_fixture.glb");
+  const bulbRef = useRef(null);
+
+  // change intensity when light is turned on
+  const bulbMaterial = materials.Bulb;
+  bulbMaterial.emissive = new THREE.Color(1, 1, 0);
+  bulbMaterial.emissiveIntensity = 1;
+
   return (
     <group {...props} dispose={null}>
       <group scale={0.801}>
@@ -21,10 +29,11 @@ const CeilingLight = (props) => {
           material={materials.Bronze}
         />
         <mesh
+          ref={bulbRef}
           castShadow
           receiveShadow
           geometry={nodes.Object_13.geometry}
-          material={materials.Bulb}
+          material={bulbMaterial}
         />
       </group>
       <group rotation={[0, Math.PI / 3, 0]} scale={0.801}>

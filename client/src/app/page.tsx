@@ -1,18 +1,16 @@
 "use client";
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-import Island from "../app/models/Island"; // Adjust the path as necessary
 import Volcano from "../app/models/Volcano";
-import AirConditioner from "../app/models/AirConditioner";
-import Refrigerator from "../app/models/Refrigerator";
-import CeilingFan from "../app/models/CeilingFan";
-import ElectricOven from "../app/models/ElectricOven";
 import { OrbitControls } from "@react-three/drei";
-import ProgressBar from "./components/ProgressBar";
 import AirConditionerScene from "./components/AirConditionerScene";
 import RefrigeratorScene from "./components/RefrigeratorScene";
 import CeilingFanScene from "./components/CeilingFanScene";
 import ElectricOvenScene from "./components/ElectricOvenScene";
+import TelevisionScene from "./components/TelevisionScene";
+import WasherDryerScene from "./components/WasherDryerScene";
+import PorchLightScene from "./components/PorchLightScene";
+import CeilingLightScene from "./components/CeilingLightScene";
 
 export default function Home() {
   return (
@@ -26,7 +24,6 @@ export default function Home() {
           justifyContent: "space-evenly",
         }}
       >
-        {" "}
         <div className="w-1/2 flex h-full flex-row items-center justify-evenly bg-slate-300">
           <div className="w-1/2 h-full flex flex-col justify-evenly">
             <div>
@@ -43,7 +40,20 @@ export default function Home() {
               <ElectricOvenScene />
             </div>
           </div>
-          <div className="w-1/2"></div>
+          <div className="w-1/2 h-full flex flex-col justify-evenly">
+            <div>
+              <TelevisionScene />
+            </div>
+            <div>
+              <WasherDryerScene />
+            </div>
+            <div>
+              <PorchLightScene />
+            </div>
+            <div>
+              <CeilingLightScene />
+            </div>
+          </div>
         </div>
         <div className="w-1/2">
           <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
@@ -53,7 +63,7 @@ export default function Home() {
               <directionalLight position={[5, 10, 5]} intensity={1} />
               <Volcano />
             </group>
-            {/* <OrbitControls /> */}
+            <OrbitControls />
           </Canvas>
         </div>
       </div>
