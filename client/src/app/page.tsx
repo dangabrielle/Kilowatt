@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import { useState, useEffect } from "react";
+import { socket } from "../socket";
 import { Canvas } from "@react-three/fiber";
 import Volcano from "../app/models/Volcano";
 import { OrbitControls } from "@react-three/drei";
@@ -13,6 +15,45 @@ import PorchLightScene from "./components/PorchLightScene";
 import CeilingLightScene from "./components/CeilingLightScene";
 
 export default function Home() {
+  const [isConnected, setIsConnected] = useState(false);
+  const [transport, setTransport] = useState("N/A");
+  const [acUnitMessage, setAcUnitMessage] = useState("");
+
+  useEffect(() => {
+    if (socket.connected) {
+      onConnect();
+    }
+
+    function onConnect() {
+      setIsConnected(true);
+      setTransport(socket.io.engine.transport.name);
+
+      socket.io.engine.on("upgrade", (transport) => {
+        setTransport(transport.name);
+      });
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+      setTransport("N/A");
+    }
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+
+    // to receive messages, use socket.on
+    // to send messages, use socket.emit
+
+    // testing ac unit websocket connection sample
+    socket.on("ac unit", (data) => {
+      setAcUnitMessage(data.message);
+    });
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -56,6 +97,13 @@ export default function Home() {
           </div>
         </div>
         <div className="w-1/2">
+          <div>
+            <p>Status: {isConnected ? "connected" : "disconnected"}</p>
+            <p>Transport: {transport}</p>
+            <p>
+              AC Unit Message: {acUnitMessage ? acUnitMessage : "Nothing yet."}
+            </p>
+          </div>
           <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
             <ambientLight intensity={2} />
 
