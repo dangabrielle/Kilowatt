@@ -13,6 +13,7 @@ import TelevisionScene from "./components/TelevisionScene";
 import WasherDryerScene from "./components/WasherDryerScene";
 import PorchLightScene from "./components/PorchLightScene";
 import CeilingLightScene from "./components/CeilingLightScene";
+import Sky from "./models/Sky";
 
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
@@ -56,63 +57,59 @@ export default function Home() {
 
   return (
     <>
-      <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <div className="w-1/2 flex h-full flex-row items-center justify-evenly bg-slate-300">
+      <div className="h-screen w-screen flex flex-row justify-evenly bg-slate-200">
+        <div className="w-2/5 flex h-full flex-row items-center justify-around gap-x-5 mr-10 ml-10">
           <div className="w-1/2 h-full flex flex-col justify-evenly">
-            <div>
+            <div className="m-2 pl-5  bg-slate-300 rounded-3xl">
               <AirConditionerScene />
             </div>
-            <div>
+            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
               <RefrigeratorScene />
             </div>
-            <div>
+            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
               <CeilingFanScene />
             </div>
 
-            <div>
+            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
               <ElectricOvenScene />
             </div>
           </div>
           <div className="w-1/2 h-full flex flex-col justify-evenly">
-            <div>
+            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
               <TelevisionScene />
             </div>
-            <div>
+            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
               <WasherDryerScene />
             </div>
-            <div>
+            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
               <PorchLightScene />
             </div>
-            <div>
+            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
               <CeilingLightScene />
             </div>
           </div>
         </div>
-        <div className="w-1/2">
-          <div>
+        <div className="w-3/5">
+          <div className="absolute z-10">
             <p>Status: {isConnected ? "connected" : "disconnected"}</p>
             <p>Transport: {transport}</p>
             <p>
               AC Unit Message: {acUnitMessage ? acUnitMessage : "Nothing yet."}
             </p>
           </div>
-          <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
-            <ambientLight intensity={2} />
-
-            <group position={[0, -10, 0]} scale={0.7}>
-              <directionalLight position={[5, 10, 5]} intensity={1} />
-              <Volcano />
-            </group>
-            <OrbitControls />
-          </Canvas>
+          <div className="h-full z-0">
+            <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
+              <ambientLight intensity={2} />
+              <group position={[0, -10, 0]} scale={0.25}>
+                <Sky />
+              </group>
+              <group position={[0, -15, 0]} scale={0.7}>
+                <directionalLight position={[5, 10, 5]} intensity={1} />
+                <Volcano />
+              </group>
+              <OrbitControls />
+            </Canvas>
+          </div>
         </div>
       </div>
     </>
