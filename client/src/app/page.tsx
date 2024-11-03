@@ -47,11 +47,12 @@ export default function Home() {
 
     // testing ac unit websocket connection sample
     socket.on("ac unit", (data) => {
-      setAcUnitMessage(data.message);
+      setAcUnitMessage(data.status);
     });
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
+      socket.off("ac unit");
     };
   }, []);
 
