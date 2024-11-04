@@ -18,7 +18,16 @@ import Sky from "./models/Sky";
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
-  const [acUnitMessage, setAcUnitMessage] = useState("");
+  const [acUnitMessage, setAcUnitMessage] = useState({
+    ac: false,
+    refrigerator: false,
+    ceilingFan: false,
+    oven: false,
+    tv: false,
+    washerDryer: false,
+    porchLight: false,
+    ceilingLight: false,
+  });
 
   useEffect(() => {
     if (socket.connected) {
@@ -46,8 +55,8 @@ export default function Home() {
     // to send messages, use socket.emit
 
     // testing ac unit websocket connection sample
-    socket.on("ac unit", (data) => {
-      setAcUnitMessage(data.status);
+    socket.on("applianceStatuses", (data) => {
+      setAcUnitMessage(data);
     });
     return () => {
       socket.off("connect", onConnect);
@@ -90,13 +99,19 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className="w-3/5">
           <div className="absolute z-10">
             <p>Status: {isConnected ? "connected" : "disconnected"}</p>
             <p>Transport: {transport}</p>
-            <p>
-              AC Unit Message: {acUnitMessage ? acUnitMessage : "Nothing yet."}
-            </p>
+            <p>AC: {acUnitMessage.ac ? "on" : "off"}</p>
+            <p>Refrigerator: {acUnitMessage.refrigerator ? "on" : "off"}</p>
+            <p>Ceiling Fan: {acUnitMessage.ceilingFan ? "on" : "off"}</p>
+            <p>Oven: {acUnitMessage.oven ? "on" : "off"}</p>
+            <p>TV: {acUnitMessage.tv ? "on" : "off"}</p>
+            <p>WasherDryer: {acUnitMessage.washerDryer ? "on" : "off"}</p>
+            <p>PorchLight: {acUnitMessage.porchLight ? "on" : "off"}</p>
+            <p>CeilingLight: {acUnitMessage.ceilingLight ? "on" : "off"}</p>
           </div>
           <div className="h-full z-0">
             <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
