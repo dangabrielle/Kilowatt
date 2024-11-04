@@ -17,7 +17,7 @@ const PorchLightScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
           <directionalLight position={[10, 0, 10]} intensity={1} />
 
           <group position={[-0.15, -1, -0.5]}>
-            <PorchLight />
+            <PorchLight status={status} />
           </group>
         </Canvas>
       </div>
