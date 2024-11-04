@@ -8,13 +8,22 @@ Title: Miele+washer+and+dryer
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useSpring, a } from "@react-spring/three";
 
-const WasherDryer = (props) => {
+const WasherDryer = ({ status }) => {
   const { scene } = useGLTF("/mielewasheranddryer.glb");
+
+  const { rotation } = useSpring({
+    from: { rotation: [0, 0, 0] },
+    to: { rotation: status ? [0, 0.2, 0] : [0, 0, 0] },
+    config: { duration: 5000, tension: 170, friction: 20 },
+    loop: true,
+  });
+
   return (
-    <mesh>
+    <a.mesh rotation={rotation}>
       <primitive object={scene} />
-    </mesh>
+    </a.mesh>
   );
 };
 

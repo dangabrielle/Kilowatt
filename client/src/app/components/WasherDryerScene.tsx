@@ -14,7 +14,7 @@ const WasherDryerScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
           <ambientLight intensity={9} />
           <directionalLight position={[1, 2, 9]} intensity={50} />
           <group position={[-7, -5, 0]}>
-            <WasherDryer />
+            <WasherDryer status={status} />
           </group>
         </Canvas>
       </div>
