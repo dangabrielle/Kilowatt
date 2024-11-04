@@ -9,15 +9,24 @@ Title: Refrigerator
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
-const Refrigerator = (props: any) => {
+interface applianceStatusProps {
+  status: boolean;
+}
+
+const Refrigerator = ({ status }: applianceStatusProps) => {
   const { scene, animations } = useGLTF("/refrigerator.glb");
   const { actions } = useAnimations(animations, scene);
 
   useEffect(() => {
-    if (actions) {
-      actions["Animation"]?.play();
+    if (status) {
+      if (actions) {
+        actions["Animation"]?.play();
+      }
+    } else {
+      actions["Animation"]?.stop();
     }
-  }, [actions]);
+  }, [status]);
+
   return (
     <mesh>
       <primitive object={scene} />

@@ -16,7 +16,7 @@ const RefrigeratorScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
           <ambientLight intensity={2} />
           <directionalLight position={[10, 10, 10]} intensity={8} />
           <group position={[-2, 10, 0]}>
-            <Refrigerator />
+            <Refrigerator status={status} />
           </group>
         </Canvas>
       </div>
