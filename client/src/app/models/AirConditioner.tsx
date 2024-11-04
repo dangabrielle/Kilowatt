@@ -9,14 +9,23 @@ Title: air conditioning system
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
-const AirConditioner = (props: any) => {
+interface applianceStatusProps {
+  status: boolean;
+}
+
+const AirConditioner = ({ status }: applianceStatusProps) => {
   const { scene, animations } = useGLTF("/air_conditioning_system.glb");
   const { actions } = useAnimations(animations, scene);
+
   useEffect(() => {
-    if (actions) {
-      actions["Cylinder.003Action"]?.play();
+    if (status) {
+      if (actions) {
+        actions["Cylinder.003Action"]?.play();
+      }
+    } else {
+      actions["Cylinder.003Action"]?.stop();
     }
-  }, [actions]);
+  }, [status]);
 
   return (
     <mesh>
