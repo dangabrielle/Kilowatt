@@ -35,9 +35,32 @@ const refrigetorTopic = "/hawaiihac/refrigerator";
 const ceilingFanTopic = "/hawaiihac/ceilingFan";
 const ovenTopic = "/hawaiihac/oven";
 const tvTopic = "/hawaiihac/tv";
-const washerDryerTopic = "/hawaiihac/tv";
+const washerDryerTopic = "/hawaiihac/washerDryer";
 const porchLightTopic = "/hawaiihac/porchLight";
 const ceilingLightTopic = "/hawaiihac/ceilingLight";
+
+// monthly kWh
+const energyConsumedPerMonth = {
+  ac: 302.67,
+  refrigerator: 45.5,
+  ceilingFan: 2.67,
+  oven: 28.08,
+  tv: 17.25,
+  washerDryer: 64.08,
+  porchLight: 18.25,
+  ceilingLight: 58.17,
+};
+
+let applianceStatuses = {
+  ac: false,
+  refrigerator: false,
+  ceilingFan: false,
+  oven: false,
+  tv: false,
+  washerDryer: false,
+  porchLight: false,
+  ceilingLight: false,
+};
 
 client.on("connect", () => {
   console.log("Connected to MQTT broker");
@@ -89,9 +112,29 @@ io.on("connection", (socket) => {
   });
 });
 
-client.on("message", async (acTopic, paylod) => {
-  const data = JSON.parse(paylod.toString());
-  io.emit("ac unit", data);
+client.on("message", async (topic, payload) => {
+  const data = JSON.parse(payload.toString());
+  const status = data.status === "on";
+
+  if (topic === "/hawaiihac/ac") {
+    applianceStatuses.ac = status;
+  } else if (topic === "/hawaiihac/refrigerator") {
+    applianceStatuses.refrigerator = status;
+  } else if (topic === "/hawaiihac/ceilingFan") {
+    applianceStatuses.ceilingFan = status;
+  } else if (topic === "/hawaiihac/oven") {
+    applianceStatuses.oven = status;
+  } else if (topic === "/hawaiihac/tv") {
+    applianceStatuses.tv = status;
+  } else if (topic === "/hawaiihac/porchLight") {
+    applianceStatuses.porchLight = status;
+    applianceStatuses.washerDryer = status;
+  } else if (topic === "/hawaiihac/washerDryer") {
+  } else {
+    applianceStatuses.ceilingLight = status;
+  }
+
+  io.emit("applianceStatuses", applianceStatuses);
   console.log(data);
 });
 
