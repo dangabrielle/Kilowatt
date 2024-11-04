@@ -9,15 +9,17 @@ Title: GE Profile Double Oven Electric Range
 import React, { useRef, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
-import { Mesh } from "three";
 
-const ElectricOven = (props: any) => {
-  const meshRef = useRef<Mesh>(null);
+interface applianceStatusProps {
+  status: boolean;
+}
+
+const ElectricOven = ({ status }: applianceStatusProps) => {
   const { scene } = useGLTF("/ge_profile_double_oven_electric_range.glb");
 
   const { rotation } = useSpring({
-    from: { rotation: [0, 0, 0] as [number, number, number] },
-    to: { rotation: [0, Math.PI / 4, 0] as [number, number, number] },
+    from: { rotation: [0, 0, 0] },
+    to: { rotation: status ? [0, Math.PI / 4, 0] : [0, 0, 0] },
     config: { duration: 5000 },
     loop: true,
   });
@@ -25,7 +27,6 @@ const ElectricOven = (props: any) => {
   return (
     <>
       <a.mesh
-        ref={meshRef}
         // must specify each axis separately to avoid typescript error
         // underscore placeholders ignore unused values
         rotation-x={rotation.to((x) => x)}
