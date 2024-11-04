@@ -2,7 +2,13 @@ import React from "react";
 import ProgressBar from "./ProgressBar";
 import Refrigerator from "../models/Refrigerator";
 import { Canvas } from "@react-three/fiber";
-const RefrigeratorScene = () => {
+
+interface ApplianceSceneProps {
+  status: boolean;
+  monthlyKWh: number;
+}
+
+const RefrigeratorScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
   return (
     <div className="flex flex-row h-full items-center justify-evenly content-center">
       <div className="w-3/4 flex items-center">
@@ -15,7 +21,7 @@ const RefrigeratorScene = () => {
         </Canvas>
       </div>
       <div className="relative flex items-center justify-center w-1/2 h-5/6">
-        <ProgressBar />
+        <ProgressBar status={status} monthlyKWh={monthlyKWh} />
       </div>
     </div>
   );

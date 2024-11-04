@@ -3,7 +3,12 @@ import { Canvas } from "@react-three/fiber";
 import PorchLight from "../models/PorchLight";
 import ProgressBar from "./ProgressBar";
 
-const PorchLightScene = () => {
+interface ApplianceSceneProps {
+  status: boolean;
+  monthlyKWh: number;
+}
+
+const PorchLightScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
   return (
     <div className="flex h-full flex-row items-center justify-evenly content-center">
       <div className="w-3/4 flex items-center">
@@ -17,7 +22,7 @@ const PorchLightScene = () => {
         </Canvas>
       </div>
       <div className="relative flex items-center justify-center w-1/2 h-5/6">
-        <ProgressBar />
+        <ProgressBar status={status} monthlyKWh={monthlyKWh} />
       </div>
     </div>
   );

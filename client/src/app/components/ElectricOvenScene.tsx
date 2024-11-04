@@ -2,8 +2,11 @@ import React from "react";
 import ProgressBar from "./ProgressBar";
 import { Canvas } from "@react-three/fiber";
 import ElectricOven from "../models/ElectricOven";
-
-const ElectricOvenScene = () => {
+interface ApplianceSceneProps {
+  status: boolean;
+  monthlyKWh: number;
+}
+const ElectricOvenScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
   return (
     <div className="flex h-full flex-row items-center justify-evenly content-center">
       <div className="w-3/4 flex items-center">
@@ -17,7 +20,7 @@ const ElectricOvenScene = () => {
         </Canvas>
       </div>
       <div className="relative flex items-center justify-center w-1/2 h-5/6">
-        <ProgressBar />
+        <ProgressBar status={status} monthlyKWh={monthlyKWh} />
       </div>
     </div>
   );

@@ -15,10 +15,21 @@ import PorchLightScene from "./components/PorchLightScene";
 import CeilingLightScene from "./components/CeilingLightScene";
 import Sky from "./models/Sky";
 
+type ApplianceStatus = {
+  ac: boolean;
+  refrigerator: boolean;
+  ceilingFan: boolean;
+  oven: boolean;
+  tv: boolean;
+  washerDryer: boolean;
+  porchLight: boolean;
+  ceilingLight: boolean;
+};
+
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
-  const [acUnitMessage, setAcUnitMessage] = useState({
+  const [applianceStatus, setApplianceStatus] = useState<ApplianceStatus>({
     ac: false,
     refrigerator: false,
     ceilingFan: false,
@@ -28,6 +39,18 @@ export default function Home() {
     porchLight: false,
     ceilingLight: false,
   });
+
+  // monthly kWh
+  const energyConsumedPerMonth = {
+    ac: 302.67,
+    refrigerator: 45.5,
+    ceilingFan: 2.67,
+    oven: 28.08,
+    tv: 17.25,
+    washerDryer: 64.08,
+    porchLight: 18.25,
+    ceilingLight: 58.17,
+  };
 
   useEffect(() => {
     if (socket.connected) {
@@ -56,7 +79,7 @@ export default function Home() {
 
     // testing ac unit websocket connection sample
     socket.on("applianceStatuses", (data) => {
-      setAcUnitMessage(data);
+      setApplianceStatus(data);
     });
     return () => {
       socket.off("connect", onConnect);
@@ -71,31 +94,55 @@ export default function Home() {
         <div className="w-2/5 flex h-full flex-row items-center justify-around gap-x-5 mr-10 ml-10">
           <div className="w-1/2 h-full flex flex-col justify-evenly">
             <div className="m-2 pl-5  bg-slate-300 rounded-3xl">
-              <AirConditionerScene />
+              <AirConditionerScene
+                status={applianceStatus.ac}
+                monthlyKWh={energyConsumedPerMonth.ac}
+              />
             </div>
             <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
-              <RefrigeratorScene />
+              <RefrigeratorScene
+                status={applianceStatus.refrigerator}
+                monthlyKWh={energyConsumedPerMonth.refrigerator}
+              />
             </div>
             <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
-              <CeilingFanScene />
+              <CeilingFanScene
+                status={applianceStatus.ceilingFan}
+                monthlyKWh={energyConsumedPerMonth.ceilingFan}
+              />
             </div>
 
             <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
-              <ElectricOvenScene />
+              <ElectricOvenScene
+                status={applianceStatus.oven}
+                monthlyKWh={energyConsumedPerMonth.oven}
+              />
             </div>
           </div>
           <div className="w-1/2 h-full flex flex-col justify-evenly">
             <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
-              <TelevisionScene />
+              <TelevisionScene
+                status={applianceStatus.tv}
+                monthlyKWh={energyConsumedPerMonth.tv}
+              />
             </div>
             <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
-              <WasherDryerScene />
+              <WasherDryerScene
+                status={applianceStatus.washerDryer}
+                monthlyKWh={energyConsumedPerMonth.washerDryer}
+              />
             </div>
             <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
-              <PorchLightScene />
+              <PorchLightScene
+                status={applianceStatus.porchLight}
+                monthlyKWh={energyConsumedPerMonth.porchLight}
+              />
             </div>
             <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
-              <CeilingLightScene />
+              <CeilingLightScene
+                status={applianceStatus.ceilingLight}
+                monthlyKWh={energyConsumedPerMonth.ceilingLight}
+              />
             </div>
           </div>
         </div>
@@ -104,14 +151,14 @@ export default function Home() {
           <div className="absolute z-10">
             <p>Status: {isConnected ? "connected" : "disconnected"}</p>
             <p>Transport: {transport}</p>
-            <p>AC: {acUnitMessage.ac ? "on" : "off"}</p>
-            <p>Refrigerator: {acUnitMessage.refrigerator ? "on" : "off"}</p>
-            <p>Ceiling Fan: {acUnitMessage.ceilingFan ? "on" : "off"}</p>
-            <p>Oven: {acUnitMessage.oven ? "on" : "off"}</p>
-            <p>TV: {acUnitMessage.tv ? "on" : "off"}</p>
-            <p>WasherDryer: {acUnitMessage.washerDryer ? "on" : "off"}</p>
-            <p>PorchLight: {acUnitMessage.porchLight ? "on" : "off"}</p>
-            <p>CeilingLight: {acUnitMessage.ceilingLight ? "on" : "off"}</p>
+            <p>AC: {applianceStatus.ac ? "on" : "off"}</p>
+            <p>Refrigerator: {applianceStatus.refrigerator ? "on" : "off"}</p>
+            <p>Ceiling Fan: {applianceStatus.ceilingFan ? "on" : "off"}</p>
+            <p>Oven: {applianceStatus.oven ? "on" : "off"}</p>
+            <p>TV: {applianceStatus.tv ? "on" : "off"}</p>
+            <p>WasherDryer: {applianceStatus.washerDryer ? "on" : "off"}</p>
+            <p>PorchLight: {applianceStatus.porchLight ? "on" : "off"}</p>
+            <p>CeilingLight: {applianceStatus.ceilingLight ? "on" : "off"}</p>
           </div>
           <div className="h-full z-0">
             <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
