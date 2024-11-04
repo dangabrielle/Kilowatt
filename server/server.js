@@ -128,8 +128,8 @@ client.on("message", async (topic, payload) => {
     applianceStatuses.tv = status;
   } else if (topic === "/hawaiihac/porchLight") {
     applianceStatuses.porchLight = status;
-    applianceStatuses.washerDryer = status;
   } else if (topic === "/hawaiihac/washerDryer") {
+    applianceStatuses.washerDryer = status;
   } else {
     applianceStatuses.ceilingLight = status;
   }
