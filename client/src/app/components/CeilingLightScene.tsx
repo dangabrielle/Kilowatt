@@ -17,7 +17,7 @@ const CeilingLightScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
           <ambientLight intensity={2} />
           <directionalLight position={[10, 10, 10]} intensity={8} />
           <group position={[0, -0.15, 0]}>
-            <CeilingLight />
+            <CeilingLight status={status} />
           </group>
           <OrbitControls />
         </Canvas>
