@@ -15,7 +15,7 @@ const ElectricOvenScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
           <directionalLight position={[10, 0, 10]} intensity={1} />
 
           <group position={[-1.2, -0.75, -0.5]}>
-            <ElectricOven />
+            <ElectricOven status={status} />
           </group>
         </Canvas>
       </div>
