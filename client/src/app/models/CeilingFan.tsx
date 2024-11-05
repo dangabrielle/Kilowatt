@@ -9,15 +9,23 @@ Title: Stylized Ceiling fan
 import React, { useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
-const CeilingFan = (props: any) => {
+interface applianceStatusProps {
+  status: boolean;
+}
+
+const CeilingFan = ({ status }: applianceStatusProps) => {
   const { animations, scene } = useGLTF("/stylized_ceiling_fan.glb");
   const { actions } = useAnimations(animations, scene);
 
   useEffect(() => {
-    if (actions) {
-      actions["Fans|Fans Rot"]?.play();
+    if (status) {
+      if (actions) {
+        actions["Fans|Fans Rot"]?.play();
+      }
+    } else {
+      actions["Fans|Fans Rot"]?.stop();
     }
-  }, [actions]);
+  }, [status]);
   return (
     <mesh>
       <primitive object={scene} scale={0.5} />

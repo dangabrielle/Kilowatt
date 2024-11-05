@@ -6,21 +6,36 @@ Source: https://sketchfab.com/3d-models/modern-ceiling-light-fixture-edafa17f987
 Title: Modern Ceiling Light Fixture
 */
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useSpring, a } from "@react-spring/three";
 import * as THREE from "three";
 
-const CeilingLight = (props) => {
+const CeilingLight = ({ status }) => {
   const { nodes, materials } = useGLTF("/modern_ceiling_light_fixture.glb");
   const bulbRef = useRef(null);
-
-  // change intensity when light is turned on
   const bulbMaterial = materials.Bulb;
-  bulbMaterial.emissive = new THREE.Color(1, 1, 0);
-  bulbMaterial.emissiveIntensity = 1;
+
+  const { rotation } = useSpring({
+    from: { rotation: [0, 0, 0] },
+    to: { rotation: status ? [0, Math.PI / 2, 0] : [0, 0, 0] },
+    config: { duration: 5000 },
+    loop: true,
+  });
+
+  useEffect(() => {
+    if (bulbMaterial) {
+      if (status) {
+        bulbMaterial.emissive = new THREE.Color(1, 1, 0); // Yellow light
+        bulbMaterial.emissiveIntensity = 1;
+      } else {
+        bulbMaterial.emissiveIntensity = 0;
+      }
+    }
+  }, [status, bulbMaterial]);
 
   return (
-    <group {...props} dispose={null}>
+    <a.group ref={bulbRef} rotation={rotation} dispose={null}>
       <group scale={0.801}>
         <mesh
           castShadow
@@ -133,7 +148,7 @@ const CeilingLight = (props) => {
         material={materials.Bronze}
         position={[0, 0.272, 0]}
       />
-    </group>
+    </a.group>
   );
 };
 
