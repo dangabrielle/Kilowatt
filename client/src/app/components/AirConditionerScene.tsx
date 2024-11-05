@@ -2,12 +2,13 @@ import React from "react";
 import ProgressBar from "./ProgressBar";
 import { Canvas } from "@react-three/fiber";
 import AirConditioner from "../models/AirConditioner";
-interface ApplianceSceneProps {
-  status: boolean;
-  monthlyKWh: number;
-}
+import { ApplianceSceneProps } from "../../../types";
 
-const AirConditionerScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
+const AirConditionerScene = ({
+  status,
+  monthlyKWh,
+  onPercentageChange,
+}: ApplianceSceneProps) => {
   return (
     <div className="flex h-full flex-row items-center justify-evenly content-center rounded-3xl">
       <div className="w-3/4 flex items-center">
@@ -20,7 +21,11 @@ const AirConditionerScene = ({ status, monthlyKWh }: ApplianceSceneProps) => {
         </Canvas>
       </div>
       <div className="relative flex items-center justify-center w-1/2 h-5/6">
-        <ProgressBar status={status} monthlyKWh={monthlyKWh} />
+        <ProgressBar
+          status={status}
+          monthlyKWh={monthlyKWh}
+          onPercentageChange={onPercentageChange}
+        />
       </div>
     </div>
   );
