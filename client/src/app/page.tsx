@@ -29,6 +29,16 @@ type ApplianceStatus = {
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
+  const [percentage, setPercentage] = useState({
+    ac: 0,
+    refrigerator: 0,
+    ceilingFan: 0,
+    oven: 0,
+    tv: 0,
+    washerDryer: 0,
+    porchLight: 0,
+    ceilingLight: 0,
+  });
   const [applianceStatus, setApplianceStatus] = useState<ApplianceStatus>({
     ac: false,
     refrigerator: false,
@@ -84,6 +94,10 @@ export default function Home() {
     };
   }, []);
 
+  const handlePercentageChange = (appliance: string, newPercentage: number) => {
+    setPercentage((prev) => ({ ...prev, [appliance]: newPercentage }));
+  };
+
   return (
     <>
       <div className="h-screen w-screen flex flex-row justify-evenly bg-slate-200">
@@ -92,50 +106,78 @@ export default function Home() {
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.ac
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.ac < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.ac < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
               } rounded-3xl`}
             >
               <AirConditionerScene
                 status={applianceStatus.ac}
                 monthlyKWh={energyConsumedPerMonth.ac}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("ac", newPercentage)
+                }
               />
             </div>
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.refrigerator
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.refrigerator < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.refrigerator < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
-              } rounded-3xl`}
+              }  rounded-3xl`}
             >
               <RefrigeratorScene
                 status={applianceStatus.refrigerator}
                 monthlyKWh={energyConsumedPerMonth.refrigerator}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("refrigerator", newPercentage)
+                }
               />
             </div>
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.ceilingFan
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.ceilingFan < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.ceilingFan < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
-              } rounded-3xl`}
+              }  rounded-3xl`}
             >
               <CeilingFanScene
                 status={applianceStatus.ceilingFan}
                 monthlyKWh={energyConsumedPerMonth.ceilingFan}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("ceilingFan", newPercentage)
+                }
               />
             </div>
 
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.oven
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.oven < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.oven < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
               } rounded-3xl`}
             >
               <ElectricOvenScene
                 status={applianceStatus.oven}
                 monthlyKWh={energyConsumedPerMonth.oven}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("oven", newPercentage)
+                }
               />
             </div>
           </div>
@@ -143,49 +185,77 @@ export default function Home() {
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.tv
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.tv < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.tv < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
-              } rounded-3xl`}
+              }  rounded-3xl`}
             >
               <TelevisionScene
                 status={applianceStatus.tv}
                 monthlyKWh={energyConsumedPerMonth.tv}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("tv", newPercentage)
+                }
               />
             </div>
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.washerDryer
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.washerDryer < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.washerDryer < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
-              } rounded-3xl`}
+              }  rounded-3xl`}
             >
               <WasherDryerScene
                 status={applianceStatus.washerDryer}
                 monthlyKWh={energyConsumedPerMonth.washerDryer}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("washerDryer", newPercentage)
+                }
               />
             </div>
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.porchLight
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.porchLight < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.porchLight < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
               } rounded-3xl`}
             >
               <PorchLightScene
                 status={applianceStatus.porchLight}
                 monthlyKWh={energyConsumedPerMonth.porchLight}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("porchLight", newPercentage)
+                }
               />
             </div>
             <div
               className={`m-2 pl-5 ${
                 applianceStatus.ceilingLight
-                  ? "bg-emerald-500 bg-opacity-40"
+                  ? percentage.ceilingLight < 70
+                    ? "bg-emerald-500 bg-opacity-40"
+                    : percentage.ceilingLight < 85
+                    ? "bg-amber-500 bg-opacity-80"
+                    : "bg-red-500 bg-opacity-85 shake"
                   : "bg-slate-300"
               } rounded-3xl`}
             >
               <CeilingLightScene
                 status={applianceStatus.ceilingLight}
                 monthlyKWh={energyConsumedPerMonth.ceilingLight}
+                onPercentageChange={(newPercentage) =>
+                  handlePercentageChange("ceilingLight", newPercentage)
+                }
               />
             </div>
           </div>
