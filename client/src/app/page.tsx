@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { socket } from "../socket";
 import { Canvas } from "@react-three/fiber";
@@ -14,6 +14,7 @@ import WasherDryerScene from "./components/WasherDryerScene";
 import PorchLightScene from "./components/PorchLightScene";
 import CeilingLightScene from "./components/CeilingLightScene";
 import Sky from "./models/Sky";
+import { object } from "framer-motion/client";
 
 type ApplianceStatus = {
   ac: boolean;
@@ -29,6 +30,7 @@ type ApplianceStatus = {
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
+  const [cumulativePercentage, setCumulativePercentage] = useState(0);
   const [percentage, setPercentage] = useState({
     ac: 0,
     refrigerator: 0,
@@ -39,6 +41,7 @@ export default function Home() {
     porchLight: 0,
     ceilingLight: 0,
   });
+
   const [applianceStatus, setApplianceStatus] = useState<ApplianceStatus>({
     ac: false,
     refrigerator: false,
@@ -98,13 +101,22 @@ export default function Home() {
     setPercentage((prev) => ({ ...prev, [appliance]: newPercentage }));
   };
 
+  useEffect(() => {
+    const currentSum = Object.values(percentage).reduce(
+      (acc, curr) => acc + curr
+    );
+    const total = 8 * 100;
+    setCumulativePercentage(currentSum / total);
+    console.log(cumulativePercentage);
+  }, [percentage]);
+
   return (
     <>
       <div className="h-screen w-screen flex flex-row justify-evenly bg-slate-200">
-        <div className="w-2/5 flex h-full flex-row items-center justify-around gap-x-5 mr-10 ml-10">
+        <div className="w-2/5 flex h-full flex-row items-center justify-evenly gap-x-5 p-10 pl-7">
           <div className="w-1/2 h-full flex flex-col justify-evenly">
             <div
-              className={`m-2 pl-5 ${
+              className={`w-full h-full m-2 pl-5 ${
                 applianceStatus.ac
                   ? percentage.ac < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -123,7 +135,7 @@ export default function Home() {
               />
             </div>
             <div
-              className={`m-2 pl-5 ${
+              className={`w-full h-full m-2 pl-5 ${
                 applianceStatus.refrigerator
                   ? percentage.refrigerator < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -142,7 +154,7 @@ export default function Home() {
               />
             </div>
             <div
-              className={`m-2 pl-5 ${
+              className={`m-2 w-full h-full pl-5 ${
                 applianceStatus.ceilingFan
                   ? percentage.ceilingFan < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -162,7 +174,7 @@ export default function Home() {
             </div>
 
             <div
-              className={`m-2 pl-5 ${
+              className={`m-2 pl-5  w-full h-full ${
                 applianceStatus.oven
                   ? percentage.oven < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -183,7 +195,7 @@ export default function Home() {
           </div>
           <div className="w-1/2 h-full flex flex-col justify-evenly">
             <div
-              className={`m-2 pl-5 ${
+              className={`m-2 pl-5 w-full h-full ${
                 applianceStatus.tv
                   ? percentage.tv < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -202,7 +214,7 @@ export default function Home() {
               />
             </div>
             <div
-              className={`m-2 pl-5 ${
+              className={`m-2 pl-5 w-full h-full ${
                 applianceStatus.washerDryer
                   ? percentage.washerDryer < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -221,7 +233,7 @@ export default function Home() {
               />
             </div>
             <div
-              className={`m-2 pl-5 ${
+              className={`m-2 pl-5 w-full h-full ${
                 applianceStatus.porchLight
                   ? percentage.porchLight < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -240,7 +252,7 @@ export default function Home() {
               />
             </div>
             <div
-              className={`m-2 pl-5 ${
+              className={`m-2 pl-5 w-full h-full ${
                 applianceStatus.ceilingLight
                   ? percentage.ceilingLight < 70
                     ? "bg-emerald-500 bg-opacity-40"
@@ -261,7 +273,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-3/5">
+        <div className="w-3/5 h-screen">
           <div className="absolute z-10">
             <p>Status: {isConnected ? "connected" : "disconnected"}</p>
             <p>Transport: {transport}</p>
@@ -274,17 +286,22 @@ export default function Home() {
             <p>PorchLight: {applianceStatus.porchLight ? "on" : "off"}</p>
             <p>CeilingLight: {applianceStatus.ceilingLight ? "on" : "off"}</p>
           </div>
-          <div className="h-full z-0">
-            <Canvas camera={{ position: [-60, 10, 80], fov: 50 }}>
-              <ambientLight intensity={2} />
-              <group position={[0, -10, 0]} scale={0.25}>
-                <Sky />
-              </group>
-              <group position={[0, -15, 0]} scale={0.7}>
-                <directionalLight position={[5, 10, 5]} intensity={1} />
-                <Volcano />
-              </group>
-              <OrbitControls />
+          <div className="h-full w-full z-0">
+            <Canvas
+              camera={{ position: [-60, 10, 80], fov: 50 }}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <Suspense fallback={null}>
+                <ambientLight intensity={2} />
+                <group position={[0, -10, 0]} scale={0.25}>
+                  <Sky />
+                </group>
+                <group position={[0, -15, 0]} scale={0.7}>
+                  <directionalLight position={[5, 10, 5]} intensity={1} />
+                  <Volcano />
+                </group>
+                {/* <OrbitControls /> */}
+              </Suspense>
             </Canvas>
           </div>
         </div>
