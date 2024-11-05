@@ -74,10 +74,6 @@ export default function Home() {
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
 
-    // to receive messages, use socket.on
-    // to send messages, use socket.emit
-
-    // testing ac unit websocket connection sample
     socket.on("applianceStatuses", (data) => {
       setApplianceStatus(data);
     });
@@ -93,26 +89,50 @@ export default function Home() {
       <div className="h-screen w-screen flex flex-row justify-evenly bg-slate-200">
         <div className="w-2/5 flex h-full flex-row items-center justify-around gap-x-5 mr-10 ml-10">
           <div className="w-1/2 h-full flex flex-col justify-evenly">
-            <div className="m-2 pl-5  bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.ac
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <AirConditionerScene
                 status={applianceStatus.ac}
                 monthlyKWh={energyConsumedPerMonth.ac}
               />
             </div>
-            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.refrigerator
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <RefrigeratorScene
                 status={applianceStatus.refrigerator}
                 monthlyKWh={energyConsumedPerMonth.refrigerator}
               />
             </div>
-            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.ceilingFan
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <CeilingFanScene
                 status={applianceStatus.ceilingFan}
                 monthlyKWh={energyConsumedPerMonth.ceilingFan}
               />
             </div>
 
-            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.oven
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <ElectricOvenScene
                 status={applianceStatus.oven}
                 monthlyKWh={energyConsumedPerMonth.oven}
@@ -120,25 +140,49 @@ export default function Home() {
             </div>
           </div>
           <div className="w-1/2 h-full flex flex-col justify-evenly">
-            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.tv
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <TelevisionScene
                 status={applianceStatus.tv}
                 monthlyKWh={energyConsumedPerMonth.tv}
               />
             </div>
-            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.washerDryer
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <WasherDryerScene
                 status={applianceStatus.washerDryer}
                 monthlyKWh={energyConsumedPerMonth.washerDryer}
               />
             </div>
-            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.porchLight
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <PorchLightScene
                 status={applianceStatus.porchLight}
                 monthlyKWh={energyConsumedPerMonth.porchLight}
               />
             </div>
-            <div className="m-2 pl-5 bg-slate-300 rounded-3xl">
+            <div
+              className={`m-2 pl-5 ${
+                applianceStatus.ceilingLight
+                  ? "bg-emerald-500 bg-opacity-40"
+                  : "bg-slate-300"
+              } rounded-3xl`}
+            >
               <CeilingLightScene
                 status={applianceStatus.ceilingLight}
                 monthlyKWh={energyConsumedPerMonth.ceilingLight}

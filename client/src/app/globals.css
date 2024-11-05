@@ -19,18 +19,11 @@ body {
   background: var(--background);
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  outline: none;
-}
-
 .box {
-  position: absolute;
   height: 110%;
-  width: 200%;
-  bottom: 0;
+  width: 250%;
+
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -38,21 +31,7 @@ body {
   border-radius: 100%;
   overflow: hidden;
 }
-.box .percent {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 3;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 64px;
-}
-.box .water {
+.water {
   position: absolute;
   left: 0;
   top: 0;

@@ -51,11 +51,11 @@ const ProgressBar = ({ status, monthlyKWh }: ProgressBarProps) => {
           <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"></path>
         </symbol>
       </svg>
-      <div className="box">
+      <div className="box ">
         <div
-          id="water"
-          className="water absolute bottom-0 w-full h-full"
+          className="water"
           style={{
+            display: `${status ? "block" : "none"}`,
             transform: `translateY(${100 - heightPercentage}%)`,
             transition: "transform 0.06s ease-in-out",
           }}
