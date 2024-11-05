@@ -1,38 +1,34 @@
 import { useEffect, useState } from "react";
+import { ProgressBarProps } from "../../../types";
 
-interface ProgressBarProps {
-  status: boolean;
-  monthlyKWh: number;
-}
-
-const ProgressBar = ({ status, monthlyKWh }: ProgressBarProps) => {
+const ProgressBar = ({
+  status,
+  monthlyKWh,
+  onPercentageChange,
+}: ProgressBarProps) => {
   const [progress, setProgress] = useState(0);
-  const dailykWh = monthlyKWh / 30;
+  const dailyKWh = monthlyKWh / 30;
   const secondsInDay = 24 * 3600;
-  const energyRatePerSecond = (dailykWh / secondsInDay) * 1000;
-  console.log(status, dailykWh);
-
-  useEffect(() => {
-    console.log("Progress:", progress, "Daily kWh:", dailykWh);
-  }, [progress, dailykWh]);
-
+  const energyRatePerSecond = (dailyKWh / secondsInDay) * 500;
   useEffect(() => {
     if (!status) {
       setProgress(0);
+      onPercentageChange(0);
       return;
     }
 
     const intervalId = setInterval(() => {
       setProgress((prev) => {
-        const newProgress = Math.min(prev + energyRatePerSecond, dailykWh);
-        console.log("Progress:", newProgress);
+        const newProgress = Math.min(prev + energyRatePerSecond, dailyKWh);
+        onPercentageChange((newProgress / dailyKWh) * 100);
         return newProgress;
       });
     }, 1000);
+
     return () => clearInterval(intervalId);
   }, [status]);
 
-  const heightPercentage = (progress / dailykWh) * 100;
+  const heightPercentage = (progress / dailyKWh) * 100;
 
   return (
     <div className="relative w-3/4 h-full  bg-gray-200 rounded-2xl overflow-hidden">
@@ -69,7 +65,7 @@ const ProgressBar = ({ status, monthlyKWh }: ProgressBarProps) => {
         </div>
       </div>
       <div className="absolute inset-0 flex items-center justify-center z-10 text-center">
-        {progress.toFixed(2)} kWh
+        {(progress * 1000).toFixed(0)} Wh
       </div>
     </div>
   );
