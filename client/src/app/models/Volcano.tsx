@@ -12,15 +12,52 @@ import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three/src/Three.js";
 import { useSpring, a, easings } from "@react-spring/three";
 
-const Volcano = (props: any) => {
-  const [isTilted, setIsTilted] = useState(true);
+interface VolcanoProps {
+  cumulativePercentage: number;
+}
+
+const Volcano = ({ cumulativePercentage }: VolcanoProps) => {
+  const [isTilted, setIsTilted] = useState(false);
   const { nodes, materials } = useGLTF("/volcano_island_lowpoly.glb");
 
   const ref: any = useRef();
 
+  useEffect(() => {
+    if (cumulativePercentage > 40) {
+      setIsTilted(true);
+    } else {
+      setIsTilted(false);
+    }
+  }, [cumulativePercentage]);
+
+  // sink
+  const handlePosition = (percentage: number) => {
+    if (percentage < 40) {
+      return [0, 0, 0];
+    } else if (percentage < 50) {
+      return [0, -4, 0];
+    } else if (percentage < 70) {
+      return [0, -5, 0];
+    } else if (percentage < 85) {
+      return [0, -8, 0];
+    } else if (percentage < 95) {
+      return [0, -20, 0];
+    } else {
+      return [0, -45, 0];
+    }
+  };
+  // tilt
+  const handleRotation = (percentage: number) => {
+    if (percentage > 40) {
+      return [Math.PI / 20, 0, 0];
+    } else {
+      return [0, 0, 0];
+    }
+  };
+
   const { position, rotation } = useSpring({
-    position: isTilted ? [0, -5, 0] : [0, 0, 0],
-    rotation: isTilted ? [Math.PI / 15, 0, 0] : [0, 0, 0], // Tilts 30 degrees on X-axis when `isTilted` is true
+    position: isTilted ? handlePosition(cumulativePercentage) : [0, 0, 0],
+    rotation: isTilted ? handleRotation(cumulativePercentage) : [0, 0, 0], // Tilts 30 degrees on X-axis when `isTilted` is true
     config: {
       duration: 600, // Adjust duration to sync position and rotation
       easing: easings.easeInOutCubic, // Smooth ease-in-out effect
@@ -32,7 +69,7 @@ const Volcano = (props: any) => {
   });
 
   return (
-    <group {...props} dispose={null} ref={ref}>
+    <group dispose={null} ref={ref}>
       <a.group // must specify each axis separately to avoid typescript error
         // underscore placeholders ignore unused values
         rotation-x={rotation.to((x) => x)}
