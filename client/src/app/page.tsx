@@ -1,6 +1,6 @@
 "use client";
 import React, { Suspense } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { socket } from "../socket";
 import { Canvas } from "@react-three/fiber";
 import Volcano from "../app/models/Volcano";
@@ -14,7 +14,7 @@ import WasherDryerScene from "./components/WasherDryerScene";
 import PorchLightScene from "./components/PorchLightScene";
 import CeilingLightScene from "./components/CeilingLightScene";
 import Sky from "./models/Sky";
-import { object } from "framer-motion/client";
+import { col } from "framer-motion/client";
 
 type ApplianceStatus = {
   ac: boolean;
@@ -31,6 +31,7 @@ export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
   const [cumulativePercentage, setCumulativePercentage] = useState(0);
+
   const [percentage, setPercentage] = useState({
     ac: 0,
     refrigerator: 0,
@@ -101,12 +102,22 @@ export default function Home() {
     setPercentage((prev) => ({ ...prev, [appliance]: newPercentage }));
   };
 
+  const colorPanel = (percentage: number) => {
+    if (percentage < 70) {
+      return "bg-emerald-500 bg-opacity-40";
+    } else if (percentage < 85) {
+      return "bg-amber-500 bg-opacity-80";
+    } else {
+      return "bg-red-500 bg-opacity-85 shake";
+    }
+  };
+
   useEffect(() => {
     const currentSum = Object.values(percentage).reduce(
       (acc, curr) => acc + curr
     );
-    const total = 8 * 100;
-    setCumulativePercentage(currentSum / total);
+    const total = Object.entries(percentage).length * 100;
+    setCumulativePercentage((currentSum / total) * 100);
     console.log(cumulativePercentage);
   }, [percentage]);
 
@@ -117,31 +128,21 @@ export default function Home() {
           <div className="w-1/2 h-full flex flex-col justify-evenly">
             <div
               className={`w-full h-full m-2 pl-5 ${
-                applianceStatus.ac
-                  ? percentage.ac < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.ac < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
-                  : "bg-slate-300"
+                applianceStatus.ac ? colorPanel(percentage.ac) : "bg-slate-300"
               } rounded-3xl`}
             >
               <AirConditionerScene
                 status={applianceStatus.ac}
                 monthlyKWh={energyConsumedPerMonth.ac}
-                onPercentageChange={(newPercentage) =>
-                  handlePercentageChange("ac", newPercentage)
-                }
+                onPercentageChange={(newPercentage) => {
+                  handlePercentageChange("ac", newPercentage);
+                }}
               />
             </div>
             <div
               className={`w-full h-full m-2 pl-5 ${
                 applianceStatus.refrigerator
-                  ? percentage.refrigerator < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.refrigerator < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
+                  ? colorPanel(percentage.refrigerator)
                   : "bg-slate-300"
               }  rounded-3xl`}
             >
@@ -156,11 +157,7 @@ export default function Home() {
             <div
               className={`m-2 w-full h-full pl-5 ${
                 applianceStatus.ceilingFan
-                  ? percentage.ceilingFan < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.ceilingFan < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
+                  ? colorPanel(percentage.ceilingFan)
                   : "bg-slate-300"
               }  rounded-3xl`}
             >
@@ -176,11 +173,7 @@ export default function Home() {
             <div
               className={`m-2 pl-5  w-full h-full ${
                 applianceStatus.oven
-                  ? percentage.oven < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.oven < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
+                  ? colorPanel(percentage.oven)
                   : "bg-slate-300"
               } rounded-3xl`}
             >
@@ -196,13 +189,7 @@ export default function Home() {
           <div className="w-1/2 h-full flex flex-col justify-evenly">
             <div
               className={`m-2 pl-5 w-full h-full ${
-                applianceStatus.tv
-                  ? percentage.tv < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.tv < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
-                  : "bg-slate-300"
+                applianceStatus.tv ? colorPanel(percentage.tv) : "bg-slate-300"
               }  rounded-3xl`}
             >
               <TelevisionScene
@@ -216,11 +203,7 @@ export default function Home() {
             <div
               className={`m-2 pl-5 w-full h-full ${
                 applianceStatus.washerDryer
-                  ? percentage.washerDryer < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.washerDryer < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
+                  ? colorPanel(percentage.washerDryer)
                   : "bg-slate-300"
               }  rounded-3xl`}
             >
@@ -235,11 +218,7 @@ export default function Home() {
             <div
               className={`m-2 pl-5 w-full h-full ${
                 applianceStatus.porchLight
-                  ? percentage.porchLight < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.porchLight < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
+                  ? colorPanel(percentage.porchLight)
                   : "bg-slate-300"
               } rounded-3xl`}
             >
@@ -254,11 +233,7 @@ export default function Home() {
             <div
               className={`m-2 pl-5 w-full h-full ${
                 applianceStatus.ceilingLight
-                  ? percentage.ceilingLight < 70
-                    ? "bg-emerald-500 bg-opacity-40"
-                    : percentage.ceilingLight < 85
-                    ? "bg-amber-500 bg-opacity-80"
-                    : "bg-red-500 bg-opacity-85 shake"
+                  ? colorPanel(percentage.ceilingLight)
                   : "bg-slate-300"
               } rounded-3xl`}
             >
@@ -300,7 +275,7 @@ export default function Home() {
                   <directionalLight position={[5, 10, 5]} intensity={1} />
                   <Volcano />
                 </group>
-                {/* <OrbitControls /> */}
+                <OrbitControls />
               </Suspense>
             </Canvas>
           </div>
