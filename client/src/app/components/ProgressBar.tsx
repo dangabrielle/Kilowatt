@@ -21,13 +21,18 @@ const ProgressBar = ({
     const intervalId = setInterval(() => {
       setProgress((prev) => {
         const newProgress = Math.min(prev + energyRatePerSecond, dailyKWh);
-        onPercentageChange((newProgress / dailyKWh) * 100);
         return newProgress;
       });
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, [status]);
+
+  useEffect(() => {
+    if (progress > 0) {
+      onPercentageChange((progress / dailyKWh) * 100);
+    }
+  }, [progress]);
 
   const heightPercentage = (progress / dailyKWh) * 100;
 
