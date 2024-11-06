@@ -14,7 +14,11 @@ import WasherDryerScene from "./components/WasherDryerScene";
 import PorchLightScene from "./components/PorchLightScene";
 import CeilingLightScene from "./components/CeilingLightScene";
 import Sky from "./models/Sky";
-import { col } from "framer-motion/client";
+import dynamic from "next/dynamic";
+import { defaultTickLabels } from "react-gauge-component/dist/lib/GaugeComponent/types/Tick";
+const GaugeComponent = dynamic(() => import("react-gauge-component"), {
+  ssr: false,
+});
 
 type ApplianceStatus = {
   ac: boolean;
@@ -103,7 +107,7 @@ export default function Home() {
   };
 
   const colorPanel = (percentage: number) => {
-    if (percentage < 70) {
+    if (percentage < 50) {
       return "bg-emerald-500 bg-opacity-40";
     } else if (percentage < 85) {
       return "bg-amber-500 bg-opacity-80";
@@ -117,7 +121,7 @@ export default function Home() {
       (acc, curr) => acc + curr
     );
     const total = Object.entries(percentage).length * 100;
-    setCumulativePercentage((currentSum / total) * 100);
+    setCumulativePercentage(Math.round((currentSum / total) * 100));
     console.log(cumulativePercentage);
   }, [percentage]);
 
@@ -250,7 +254,7 @@ export default function Home() {
 
         <div className="w-3/5 h-screen">
           <div className="absolute z-10">
-            <p>Status: {isConnected ? "connected" : "disconnected"}</p>
+            {/* <p>Status: {isConnected ? "connected" : "disconnected"}</p>
             <p>Transport: {transport}</p>
             <p>AC: {applianceStatus.ac ? "on" : "off"}</p>
             <p>Refrigerator: {applianceStatus.refrigerator ? "on" : "off"}</p>
@@ -259,7 +263,41 @@ export default function Home() {
             <p>TV: {applianceStatus.tv ? "on" : "off"}</p>
             <p>WasherDryer: {applianceStatus.washerDryer ? "on" : "off"}</p>
             <p>PorchLight: {applianceStatus.porchLight ? "on" : "off"}</p>
-            <p>CeilingLight: {applianceStatus.ceilingLight ? "on" : "off"}</p>
+            <p>CeilingLight: {applianceStatus.ceilingLight ? "on" : "off"}</p> */}
+            <GaugeComponent
+              arc={{
+                subArcs: [
+                  {
+                    limit: 20,
+                    color: "#5BE12C",
+                    showTick: true,
+                  },
+                  {
+                    limit: 40,
+                    color: "#F5CD19",
+                    showTick: true,
+                  },
+                  {
+                    limit: 60,
+                    color: "#F58B19",
+                    showTick: true,
+                  },
+                  {
+                    limit: 100,
+                    color: "#EA4228",
+                    showTick: true,
+                  },
+                ],
+              }}
+              labels={{
+                tickLabels: {
+                  defaultTickValueConfig: {
+                    style: { fill: "white" },
+                  },
+                },
+              }}
+              value={cumulativePercentage}
+            />
           </div>
           <div className="h-full w-full z-0">
             <Canvas
@@ -273,7 +311,7 @@ export default function Home() {
                 </group>
                 <group position={[0, -15, 0]} scale={0.7}>
                   <directionalLight position={[5, 10, 5]} intensity={1} />
-                  <Volcano />
+                  <Volcano cumulativePercentage={cumulativePercentage} />
                 </group>
                 <OrbitControls />
               </Suspense>
