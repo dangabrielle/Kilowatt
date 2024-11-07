@@ -11,7 +11,7 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three/src/Three.js";
 import { useSpring, a, easings } from "@react-spring/three";
-
+import * as THREE from "three";
 interface VolcanoProps {
   cumulativePercentage: number;
 }
@@ -23,7 +23,7 @@ const Volcano = ({ cumulativePercentage }: VolcanoProps) => {
   const ref: any = useRef();
 
   useEffect(() => {
-    if (cumulativePercentage > 40) {
+    if (cumulativePercentage > 50) {
       setIsTilted(true);
     } else {
       setIsTilted(false);
@@ -32,35 +32,41 @@ const Volcano = ({ cumulativePercentage }: VolcanoProps) => {
 
   // sink
   const handlePosition = (percentage: number) => {
-    if (percentage < 40) {
-      return [0, 0, 0];
-    } else if (percentage < 50) {
-      return [0, -4, 0];
+    if (percentage < 55) {
+      return [0, -2, 0];
+    } else if (percentage < 60) {
+      return [0, -3, 0];
     } else if (percentage < 70) {
-      return [0, -5, 0];
+      return [0, -4, 0];
     } else if (percentage < 85) {
-      return [0, -8, 0];
-    } else if (percentage < 95) {
+      return [0, -5, 0];
+    } else if (percentage < 90) {
+      return [0, -10, 0];
+    } else if (percentage > 89 && percentage < 100) {
       return [0, -20, 0];
-    } else {
-      return [0, -45, 0];
-    }
+    } else if (percentage === 100) {
+      return [0, -50, 0];
+    } else return [0, 0, 0];
   };
   // tilt
   const handleRotation = (percentage: number) => {
-    if (percentage > 40) {
+    if (percentage < 55) {
+      return [Math.PI / 80, 0, 0];
+    } else if (percentage < 60) {
+      return [Math.PI / 30, 0, 0];
+    } else if (percentage < 90) {
       return [Math.PI / 20, 0, 0];
-    } else {
-      return [0, 0, 0];
-    }
+    } else if (percentage > 89) {
+      return [Math.PI / 15, 0, 0];
+    } else return [0, 0, 0];
   };
 
   const { position, rotation } = useSpring({
     position: isTilted ? handlePosition(cumulativePercentage) : [0, 0, 0],
     rotation: isTilted ? handleRotation(cumulativePercentage) : [0, 0, 0], // Tilts 30 degrees on X-axis when `isTilted` is true
     config: {
-      duration: 600, // Adjust duration to sync position and rotation
-      easing: easings.easeInOutCubic, // Smooth ease-in-out effect
+      duration: 5000,
+      easing: easings.easeInOutCubic,
     },
   });
 
@@ -94,15 +100,7 @@ const Volcano = ({ cumulativePercentage }: VolcanoProps) => {
           rotation={[-Math.PI / 2, 0, 0]}
           scale={0.5}
         />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={(nodes.Tequila_Bottle_Tequila_Bottle_0 as Mesh).geometry}
-          material={materials.Tequila_Bottle}
-          position={[3492.547, 1112.371, 3620.925]}
-          rotation={[-1.38, 0.112, -0.022]}
-          scale={0.5}
-        />
+
         <mesh
           castShadow
           receiveShadow
@@ -194,10 +192,21 @@ const Volcano = ({ cumulativePercentage }: VolcanoProps) => {
         />
       </a.group>
       <mesh
-        castShadow
-        receiveShadow
+        castShadow={true}
+        receiveShadow={true}
         geometry={(nodes.Ocean_Ocean_0 as Mesh).geometry}
-        material={materials.Ocean}
+        material={
+          new THREE.MeshPhysicalMaterial({
+            color: "#00eff7",
+            roughness: 0.6,
+            metalness: 0.1,
+            reflectivity: 0.5,
+            clearcoat: 0.3,
+            clearcoatRoughness: 0.1,
+            transparent: true,
+            opacity: 0.95,
+          })
+        }
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.5}
       />
