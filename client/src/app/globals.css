@@ -5,6 +5,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-blue: #a4c6b7c7;
+  --color-green: #c8c8a9;
+  --color-brown: #774f38;
+  --color-beige: #ece5ce;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -101,6 +105,85 @@ body {
 
 .shake {
   animation: shake 0.5s ease-in-out infinite;
+}
+
+/* FloatAnimation.module.scss */
+
+.container {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  /* font: 2vw system-ui; */
+  background-color: var(--color-yellow);
+}
+
+.floatText {
+  transform: translateY(0px);
+  animation: float 5s ease-in-out infinite;
+  /* text-align: center; */
+  /* text-transform: uppercase; */
+  /* font-weight: bold;
+  letter-spacing: 3px; */
+  /* font-size: 15px; */
+  color: var(--color-brown);
+  background-color: var(--color-beige);
+  padding: 40px;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: 10px 8px var(--color-blue);
+  /* font-family: "Baloo 2", cursive; */
+}
+
+.floatText::after {
+  transform: translateY(0px);
+  animation: float2 5s ease-in-out infinite;
+  content: ".";
+  font-weight: bold;
+  -webkit-text-fill-color: var(--color-beige);
+  text-shadow: 22px 22px var(--color-blue);
+  text-align: center;
+  font-size: 60px;
+  width: 40px;
+  height: 20px;
+  line-height: 60px;
+  border-radius: 11px;
+  background-color: var(--color-beige);
+  position: absolute;
+  display: block;
+  bottom: -50px;
+  left: 50px;
+  box-shadow: 22px 22px var(--color-blue);
+  z-index: -2;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    line-height: 30px;
+    transform: translateY(0px);
+  }
+  55% {
+    transform: translateY(-20px);
+  }
+  60% {
+    line-height: 20px;
+  }
+  100% {
+    line-height: 60px;
+    transform: translateY(0px);
+  }
 }
 
 @layer utilities {
