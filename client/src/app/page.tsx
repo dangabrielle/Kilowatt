@@ -125,12 +125,6 @@ export default function Home() {
     console.log(cumulativePercentage);
   }, [percentage]);
 
-  const [zoom, setZoom] = useState(false);
-
-  useEffect(() => {
-    setZoom(true); // Trigger zoom-in effect
-  }, []);
-
   return (
     <>
       <div className="h-screen w-screen flex flex-row justify-evenly bg-slate-200">
@@ -258,8 +252,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-3/5 h-screen">
-          <div className="absolute z-10">
+        <div className="relative w-3/5 h-screen">
+          <div className="absolute flex w-full h-1/3 flex-row z-10 p-5 pl-0 -ml-5 justify-start">
             {/* <p>Status: {isConnected ? "connected" : "disconnected"}</p>
             <p>Transport: {transport}</p>
             <p>AC: {applianceStatus.ac ? "on" : "off"}</p>
@@ -270,35 +264,76 @@ export default function Home() {
             <p>WasherDryer: {applianceStatus.washerDryer ? "on" : "off"}</p>
             <p>PorchLight: {applianceStatus.porchLight ? "on" : "off"}</p>
             <p>CeilingLight: {applianceStatus.ceilingLight ? "on" : "off"}</p> */}
-            <GaugeComponent
-              arc={{
-                subArcs: [
-                  {
-                    limit: 50,
-                    color: "#5BE12C",
-                    showTick: true,
-                  },
-                  {
-                    limit: 85,
-                    color: "#F58B19",
-                    showTick: true,
-                  },
-                  {
-                    limit: 100,
-                    color: "#EA4228",
-                    showTick: true,
-                  },
-                ],
+            <div
+              style={{
+                textAlign: "center",
+                marginRight: "1rem",
+                color: "white",
+                height: "50%",
+                width: "50%",
+                maxHeight: "90%",
+                maxWidth: "90%",
+                fontSize: "1.5rem",
+                textShadow: "black 2px 2px 2px",
               }}
-              labels={{
-                tickLabels: {
-                  defaultTickValueConfig: {
-                    style: { fill: "white" },
+            >
+              <h1 className="p-2">ISLAND ENERGY USAGE</h1>
+
+              <GaugeComponent
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "relative",
+                  opacity: 90,
+                }}
+                marginInPercent={{
+                  top: 0.12,
+                  bottom: 0.0,
+                  left: 0.13,
+                  right: 0.1,
+                }}
+                arc={{
+                  emptyColor: "#a4c6b7c7",
+
+                  subArcs: [
+                    {
+                      limit: 50,
+                      color: "#5BE12C",
+                      showTick: true,
+                    },
+                    {
+                      limit: 85,
+                      color: "#F58B19",
+                      showTick: true,
+                    },
+                    {
+                      limit: 100,
+                      color: "#EA4228",
+                      showTick: true,
+                    },
+                  ],
+                }}
+                labels={{
+                  tickLabels: {
+                    defaultTickValueConfig: {
+                      style: {
+                        fill: "white",
+                        fontSize: "1rem",
+                        textShadow: "black 1px 1px 1px",
+                      },
+                    },
                   },
-                },
-              }}
-              value={cumulativePercentage}
-            />
+                }}
+                value={cumulativePercentage}
+              />
+            </div>
+            <div className="w-1/2 h-1/2 mt-10 flex items-center justify-center text-2xl  bg-neutral-50 bg-opacity-90 rounded-3xl text-gray-800 floatText">
+              <div
+                className={`${cumulativePercentage > 0 ? "hidden" : "block"}`}
+              >
+                QUICK! Turn something on...
+              </div>
+            </div>
           </div>
           <div className="h-full w-full z-0">
             <Canvas
@@ -310,11 +345,10 @@ export default function Home() {
                 <group position={[0, -10, 0]} scale={0.25}>
                   <Sky />
                 </group>
-                <group position={[0, -15, 0]} scale={0.7}>
+                <group position={[0, -18, 0]} scale={0.7}>
                   <directionalLight position={[5, 10, 5]} intensity={2} />
                   <Volcano cumulativePercentage={cumulativePercentage} />
                 </group>
-                <OrbitControls />
               </Suspense>
             </Canvas>
           </div>
