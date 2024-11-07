@@ -1,6 +1,6 @@
 "use client";
 import React, { Suspense } from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { socket } from "../socket";
 import { Canvas } from "@react-three/fiber";
 import Volcano from "../app/models/Volcano";
@@ -15,7 +15,7 @@ import PorchLightScene from "./components/PorchLightScene";
 import CeilingLightScene from "./components/CeilingLightScene";
 import Sky from "./models/Sky";
 import dynamic from "next/dynamic";
-import { defaultTickLabels } from "react-gauge-component/dist/lib/GaugeComponent/types/Tick";
+
 const GaugeComponent = dynamic(() => import("react-gauge-component"), {
   ssr: false,
 });
@@ -124,6 +124,12 @@ export default function Home() {
     setCumulativePercentage(Math.round((currentSum / total) * 100));
     console.log(cumulativePercentage);
   }, [percentage]);
+
+  const [zoom, setZoom] = useState(false);
+
+  useEffect(() => {
+    setZoom(true); // Trigger zoom-in effect
+  }, []);
 
   return (
     <>
@@ -268,17 +274,12 @@ export default function Home() {
               arc={{
                 subArcs: [
                   {
-                    limit: 20,
+                    limit: 50,
                     color: "#5BE12C",
                     showTick: true,
                   },
                   {
-                    limit: 40,
-                    color: "#F5CD19",
-                    showTick: true,
-                  },
-                  {
-                    limit: 60,
+                    limit: 85,
                     color: "#F58B19",
                     showTick: true,
                   },
@@ -310,7 +311,7 @@ export default function Home() {
                   <Sky />
                 </group>
                 <group position={[0, -15, 0]} scale={0.7}>
-                  <directionalLight position={[5, 10, 5]} intensity={1} />
+                  <directionalLight position={[5, 10, 5]} intensity={2} />
                   <Volcano cumulativePercentage={cumulativePercentage} />
                 </group>
                 <OrbitControls />
