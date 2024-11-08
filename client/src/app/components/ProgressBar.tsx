@@ -5,32 +5,40 @@ const ProgressBar = ({
   status,
   monthlyKWh,
   onPercentageChange,
+  onNewText,
 }: ProgressBarProps) => {
   const [progress, setProgress] = useState(0);
   const dailyKWh = monthlyKWh / 30;
   const secondsInDay = 24 * 3600;
   const energyRatePerSecond = (dailyKWh / secondsInDay) * 1000;
-
+  console.log(energyRatePerSecond);
   useEffect(() => {
     if (!status) {
-      setProgress(0);
-      onPercentageChange(0);
-      return;
+      if (progress != dailyKWh) {
+        return;
+      } else {
+        setProgress(0);
+        onPercentageChange(0);
+        onNewText(0);
+      }
+    } else {
+      if (progress >= dailyKWh) return;
+
+      const intervalId = setInterval(() => {
+        setProgress((prev) => {
+          const newProgress = Math.min(prev + energyRatePerSecond, dailyKWh);
+          return newProgress;
+        });
+      }, 1000);
+
+      return () => clearInterval(intervalId);
     }
-
-    const intervalId = setInterval(() => {
-      setProgress((prev) => {
-        const newProgress = Math.min(prev + energyRatePerSecond, dailyKWh);
-        return newProgress;
-      });
-    }, 1000);
-
-    return () => clearInterval(intervalId);
   }, [status]);
 
   useEffect(() => {
     if (progress > 0) {
       onPercentageChange((progress / dailyKWh) * 100);
+      onNewText((progress / dailyKWh) * 100);
     }
   }, [progress]);
 
@@ -57,7 +65,12 @@ const ProgressBar = ({
         <div
           className="water"
           style={{
-            display: `${status ? "block" : "none"}`,
+            display: `${
+              status || (heightPercentage > 0 && heightPercentage < 100)
+                ? "block"
+                : "none"
+            }`,
+
             transform: `translateY(${100 - heightPercentage}%)`,
             transition: "transform 0.06s ease-in-out",
           }}
@@ -70,8 +83,8 @@ const ProgressBar = ({
           </svg>
         </div>
       </div>
-      <div className="absolute inset-0 flex items-center justify-center z-10 text-center">
-        {(progress * 1000).toFixed(0)} Wh
+      <div className="absolute inset-0 flex items-center justify-center z-10 text-center p-5 sm:text-xs md:text-sm lg:text-base">
+        {progress === dailyKWh ? "MAX" : `${(progress * 1000).toFixed(0)} Wh`}
       </div>
     </div>
   );
