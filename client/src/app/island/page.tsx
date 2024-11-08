@@ -35,6 +35,7 @@ export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
   const [cumulativePercentage, setCumulativePercentage] = useState(0);
+  const [textBubble, setTextBubble] = useState("");
 
   const [percentage, setPercentage] = useState({
     ac: 0,
@@ -115,6 +116,38 @@ export default function Home() {
       return "bg-red-500 bg-opacity-85 shake";
     }
   };
+
+  useEffect(() => {
+    const handleText = (percentage: number) => {
+      if (percentage < 1) {
+        setTextBubble("QUICK! Turn some stuff on!");
+      } else if (percentage < 5) {
+        setTextBubble("Nice job! Let's turn more things on");
+      } else if (percentage < 25) {
+        setTextBubble(
+          "Just be careful not to use too much energy..or our island will sink!"
+        );
+      } else if (percentage < 50) {
+        setTextBubble(
+          "We're at a good place! Let's try to stay in this range."
+        );
+      } else if (percentage < 85) {
+        setTextBubble(
+          "We're using up extra energy than we should..let's turn something off to save electric."
+        );
+      } else if (percentage < 100) {
+        setTextBubble(
+          "We're in the danger zone! Turn something off immediately!!"
+        );
+      } else if (percentage === 100) {
+        setTextBubble(
+          "OH NO!! Our island sank!!! Save it by turning something off!!"
+        );
+      }
+    };
+
+    handleText(cumulativePercentage);
+  }, [cumulativePercentage]);
 
   useEffect(() => {
     const currentSum = Object.values(percentage).reduce(
@@ -318,12 +351,10 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="w-2/5 h-1/2 mt-14 mr-10 -ml-16 flex items-center justify-center text-2xl floatText">
-              <div
-                className={`${cumulativePercentage > 0 ? "hidden" : "block"}`}
-              >
-                QUICK! Turn something on...
-                <a href="/api/auth/login">Login</a>
+            <div className="w-2/5 h-1/2 mt-14 mr-10 -ml-16 flex items-center justify-center sm:text-s md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-center floatText">
+              <div>
+                {textBubble}
+                {/* <a href="/api/auth/login">Login</a> */}
               </div>
             </div>
           </div>
