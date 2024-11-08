@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Acme } from "next/font/google";
 import "./globals.css";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 const acme = Acme({
   weight: "400",
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={acme.className}>{children}</body>
+      <UserProvider>
+        <body className={acme.className}>{children}</body>
+      </UserProvider>
     </html>
   );
 }
