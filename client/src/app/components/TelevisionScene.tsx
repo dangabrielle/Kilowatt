@@ -38,9 +38,9 @@ const TelevisionScene = ({
             </group>
           </Suspense>
         </Canvas>
-        <p className="sm:text-xs md:text-sm 2xl:text-base -mt-2 text-center">
-          TV {text}
-        </p>
+        <div className="sm:text-xs md:text-sm 2xl:text-base -mt-2 text-center">
+          <p>TV {text}</p>
+        </div>
       </div>
       <div className="relative flex items-center justify-center w-1/2 h-5/6">
         <ProgressBar
