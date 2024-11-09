@@ -5,6 +5,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-blue: #a4c6b7c7;
+  --color-green: #c8c8a9;
+  --color-brown: #774f38;
+  --color-beige: #ece5ceeb;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,8 +21,166 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  scrollbar-width: thin; /* Apply global styles for scrollbar */
 
-  font-family: Arial, Helvetica, sans-serif;
+  scrollbar-color: #b3b5b889 #2d374800;
+}
+
+.box {
+  height: 110%;
+  width: 250%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #e0e0e0;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.water {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  transform: translate(0, 100%);
+  background: #85a1ef;
+  transition: all 0.3s;
+}
+.box .water_wave {
+  width: 200%;
+  position: absolute;
+  bottom: 100%;
+}
+.box .water_wave_back {
+  right: 0;
+  fill: #c7eeff;
+  -webkit-animation: wave-back 1.4s infinite linear;
+  animation: wave-back 1.4s infinite linear;
+}
+.box .water_wave_front {
+  left: 0;
+  fill: #85a1ef;
+  margin-bottom: -1px;
+  -webkit-animation: wave-front 0.7s infinite linear;
+  animation: wave-front 0.7s infinite linear;
+}
+
+@-webkit-keyframes wave-front {
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes wave-front {
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+@-webkit-keyframes wave-back {
+  100% {
+    transform: translate(50%, 0);
+  }
+}
+@keyframes wave-back {
+  100% {
+    transform: translate(50%, 0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.floatText {
+  transform: translateY(0px);
+  animation: float 5s ease-in-out infinite;
+  color: var(--color-brown);
+  background-color: var(--color-beige);
+  padding: 20px;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: 10px 8px var(--color-blue);
+}
+
+.floatText::after {
+  transform: translateY(0px);
+  animation: float2 5s ease-in-out infinite;
+  content: ".";
+  font-weight: bold;
+  -webkit-text-fill-color: var(--color-beige);
+  text-shadow: 22px 22px var(--color-blue);
+  text-align: center;
+  font-size: 60px;
+  width: 40px;
+  height: 20px;
+  line-height: 60px;
+  border-radius: 11px;
+  background-color: var(--color-beige);
+  position: absolute;
+  display: block;
+  bottom: -50px;
+  left: 50px;
+  box-shadow: 22px 22px var(--color-blue);
+  z-index: -2;
+}
+
+.floatTextAbout {
+  transform: translateY(0px);
+  animation: float 5s ease-in-out infinite;
+  color: var(--color-brown);
+  background-color: var(--color-beige);
+  padding: 20px;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: 10px 8px var(--color-blue);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    line-height: 30px;
+    transform: translateY(0px);
+  }
+  55% {
+    transform: translateY(-20px);
+  }
+  60% {
+    line-height: 20px;
+  }
+  100% {
+    line-height: 60px;
+    transform: translateY(0px);
+  }
 }
 
 @layer utilities {
