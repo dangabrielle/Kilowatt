@@ -15,6 +15,7 @@ import PorchLightScene from "../components/PorchLightScene";
 import CeilingLightScene from "../components/CeilingLightScene";
 import Sky from "../models/Sky";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const GaugeComponent = dynamic(() => import("react-gauge-component"), {
   ssr: false,
@@ -286,6 +287,11 @@ export default function Home() {
         </div>
 
         <div className="relative w-3/5 h-screen">
+          <div className="absolute top-5 right-10 z-50 bg-neutral-200 shadow-md  hover:scale-105 hover:bg-orange-200 hover:bg-opacity-70 active:scale-110 active:bg-orange-200 shadow-gray-500 text-rose-950 bg-opacity-80 p-1 pr-3 pl-3 rounded-2xl">
+            <button>
+              <Link href="/api/auth/logout">Logout</Link>
+            </button>
+          </div>
           <div className="absolute flex w-full h-1/3 flex-row z-10 p-10 justify-center">
             <div
               style={{
@@ -351,8 +357,8 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="w-2/5 h-1/2 mt-14 mr-10 -ml-16 flex items-center justify-center sm:text-s md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-center floatText">
-              <div>
+            <div className="w-2/5 h-1/2 mt-14 mr-10 -ml-16 flex items-center justify-center floatText">
+              <div className="m-10 sm:text-s md:text-base lg:text-lg 2xl:text-2xl text-center">
                 {textBubble}
                 {/* <a href="/api/auth/login">Login</a> */}
               </div>
