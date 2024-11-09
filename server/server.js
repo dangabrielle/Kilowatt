@@ -1,6 +1,7 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
+const dotenv = require("dotenv");
 const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
@@ -8,6 +9,7 @@ const server = http.createServer(app);
 const mqtt = require("mqtt");
 
 app.use(cors());
+dotenv.config();
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Kilowatt server");
@@ -30,26 +32,14 @@ const client = mqtt.connect(connectUrl, {
   reconnectPeriod: 1000,
 });
 
-const acTopic = "/hawaiihac/ac";
-const refrigetorTopic = "/hawaiihac/refrigerator";
-const ceilingFanTopic = "/hawaiihac/ceilingFan";
-const ovenTopic = "/hawaiihac/oven";
-const tvTopic = "/hawaiihac/tv";
-const washerDryerTopic = "/hawaiihac/washerDryer";
-const porchLightTopic = "/hawaiihac/porchLight";
-const ceilingLightTopic = "/hawaiihac/ceilingLight";
-
-// monthly kWh
-const energyConsumedPerMonth = {
-  ac: 302.67,
-  refrigerator: 45.5,
-  ceilingFan: 2.67,
-  oven: 28.08,
-  tv: 17.25,
-  washerDryer: 64.08,
-  porchLight: 18.25,
-  ceilingLight: 58.17,
-};
+const acTopic = process.env.AC_TOPIC;
+const refrigetorTopic = process.env.REF_TOPIC;
+const ceilingFanTopic = process.env.CEIL_FAN_TOPIC;
+const ovenTopic = process.env.OVEN_TOPIC;
+const tvTopic = process.env.TV_TOPIC;
+const washerDryerTopic = process.env.WASHER_DRY_TOPIC;
+const porchLightTopic = process.env.PORCH_LIGHT_TOPIC;
+const ceilingLightTopic = process.env.CEIL_LIGHT_TOPIC;
 
 let applianceStatuses = {
   ac: false,
@@ -93,7 +83,7 @@ client.on("connect", () => {
 // WebsocketIO connection
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000/",
+    origin: process.env.URL,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   },
@@ -101,11 +91,6 @@ const io = socketIo(server, {
 
 io.on("connection", (socket) => {
   console.log("Websocket client connected");
-  // SEND DATA POINTS HERE --> sample ac unit message as string, able to adjust
-  // object as you see fit
-  // to receive messages, use socket.on
-  // to send messages, use socket.emit
-  // Navigate to client/src/app/page.tsx to view where the message is received
 
   socket.on("disconnect", () => {
     console.log("Websocket client disconnected");
@@ -116,19 +101,19 @@ client.on("message", async (topic, payload) => {
   const data = JSON.parse(payload.toString());
   const status = data.status === "on";
 
-  if (topic === "/hawaiihac/ac") {
+  if (topic === acTopic) {
     applianceStatuses.ac = status;
-  } else if (topic === "/hawaiihac/refrigerator") {
+  } else if (topic === refrigetorTopic) {
     applianceStatuses.refrigerator = status;
-  } else if (topic === "/hawaiihac/ceilingFan") {
+  } else if (topic === ceilingFanTopic) {
     applianceStatuses.ceilingFan = status;
-  } else if (topic === "/hawaiihac/oven") {
+  } else if (topic === ovenTopic) {
     applianceStatuses.oven = status;
-  } else if (topic === "/hawaiihac/tv") {
+  } else if (topic === tvTopic) {
     applianceStatuses.tv = status;
-  } else if (topic === "/hawaiihac/porchLight") {
+  } else if (topic === porchLightTopic) {
     applianceStatuses.porchLight = status;
-  } else if (topic === "/hawaiihac/washerDryer") {
+  } else if (topic === washerDryerTopic) {
     applianceStatuses.washerDryer = status;
   } else {
     applianceStatuses.ceilingLight = status;
