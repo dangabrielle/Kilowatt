@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import Volcano from "../models/Volcano";
 import Sky from "../models/Sky";
+import Link from "next/link";
 
 const login = () => {
   return (
@@ -15,11 +16,14 @@ const login = () => {
             <h1>HAWAI'I HACKATHON 2024</h1>
             <h1>Hawai'i Keiki Museum Challenge</h1>
             <h1 className="relative text-stone-800 p-2 bg-opacity-70 mt-2 text-center text-xs md:text-md lg:text-base">
-              <em>KILOWATT: ISLAND SURGE</em>
+              <em>KILOWATT ISLAND SURGE</em>
             </h1>
-            <div className="relative text-center text-white z-50 bg-gray-400 w-1/2 shadow-gray-700 shadow-md hover:bg-slate-500 bg-opacity-70 rounded-md p-2 text-xs md:text-md lg:text-base">
-              <a href="/api/auth/login">Login of Sign Up</a>
-            </div>
+            <button className="relative text-center  hover:scale-105 active:scale-110 text-white z-50 bg-yellow-900 w-1/2 shadow-gray-700 shadow-md hover:bg-yellow-700 bg-opacity-70 rounded-md p-2 text-xs md:text-md lg:text-base">
+              <Link href="/api/auth/login">Login of Sign Up</Link>
+            </button>
+            <button>
+              <Link href="/about">About this project</Link>
+            </button>
           </div>
         </div>
         <div className="h-screen w-screen z-0">
