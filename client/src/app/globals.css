@@ -21,6 +21,9 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  scrollbar-width: thin; /* Apply global styles for scrollbar */
+
+  scrollbar-color: #b3b5b889 #2d374800;
 }
 
 .box {
@@ -138,6 +141,17 @@ body {
   left: 50px;
   box-shadow: 22px 22px var(--color-blue);
   z-index: -2;
+}
+
+.floatTextAbout {
+  transform: translateY(0px);
+  animation: float 5s ease-in-out infinite;
+  color: var(--color-brown);
+  background-color: var(--color-beige);
+  padding: 20px;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: 10px 8px var(--color-blue);
 }
 
 @keyframes float {
