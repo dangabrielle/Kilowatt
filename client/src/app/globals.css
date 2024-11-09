@@ -107,32 +107,15 @@ body {
   animation: shake 0.5s ease-in-out infinite;
 }
 
-/* FloatAnimation.module.scss */
-
-.container {
-  height: 100vh;
-  margin: 0;
-  display: grid;
-  place-items: center;
-  /* font: 2vw system-ui; */
-  background-color: var(--color-yellow);
-}
-
 .floatText {
   transform: translateY(0px);
   animation: float 5s ease-in-out infinite;
-  /* text-align: center; */
-  /* text-transform: uppercase; */
-  /* font-weight: bold;
-  letter-spacing: 3px; */
-  /* font-size: 15px; */
   color: var(--color-brown);
   background-color: var(--color-beige);
-  padding: 40px;
+  padding: 20px;
   border-radius: 40px;
   position: relative;
   box-shadow: 10px 8px var(--color-blue);
-  /* font-family: "Baloo 2", cursive; */
 }
 
 .floatText::after {
