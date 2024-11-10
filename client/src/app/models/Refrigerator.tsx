@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/refrigerator-9eeff266683a464a9a3cc1e6a2f
 Title: Refrigerator
 */
 
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 interface applianceStatusProps {
@@ -25,7 +25,7 @@ const Refrigerator = ({ status }: applianceStatusProps) => {
     } else {
       actions["Animation"]?.stop();
     }
-  }, [status]);
+  }, [status, actions]);
 
   return (
     <mesh>

@@ -25,7 +25,7 @@ const CeilingFan = ({ status }: applianceStatusProps) => {
     } else {
       actions["Fans|Fans Rot"]?.stop();
     }
-  }, [status]);
+  }, [status, actions]);
   return (
     <mesh>
       <primitive object={scene} scale={0.5} />
