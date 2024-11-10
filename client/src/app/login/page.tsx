@@ -9,12 +9,6 @@ import Link from "next/link";
 import { OrbitControls } from "@react-three/drei";
 
 const login = () => {
-  const audioPlayback = useRef<HTMLAudioElement>(null);
-
-  useEffect(() => {
-    audioPlayback.current?.play();
-  }, []);
-
   return (
     <>
       <div className="h-screen w-full flex flex-col items-center">
