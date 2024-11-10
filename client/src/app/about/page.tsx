@@ -35,7 +35,7 @@ const about = () => {
           limit, the island will sink!
         </p>
         <button className="relative text-center hover:scale-105 active:scale-100 text-white z-50 bg-yellow-900 w-full max-w-xs shadow-gray-700 shadow-md hover:bg-yellow-700 bg-opacity-70 rounded-md p-2 text-xs md:text-md lg:text-base">
-          <Link href="/api/auth/login">Try it out here!</Link>
+          <a href="/api/auth/login">Try it out here!</a>
         </button>
       </div>
       <div className="absolute w-full h-full z-0">

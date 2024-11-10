@@ -263,7 +263,7 @@ export default function Home() {
         <div className="relative w-3/5 h-screen">
           <div className="absolute top-5 right-10 z-50 bg-neutral-200 shadow-md  hover:scale-105 hover:bg-orange-200 hover:bg-opacity-70 active:scale-110 active:bg-orange-200 shadow-gray-500 text-rose-950 bg-opacity-80 p-1 pr-3 pl-3 rounded-2xl">
             <button>
-              <Link href="/api/auth/logout">Logout</Link>
+              <a href="/api/auth/logout">Logout</a>
             </button>
           </div>
           <div className="absolute flex w-full h-1/3 flex-row z-10 p-10 justify-center">

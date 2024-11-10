@@ -24,7 +24,7 @@ const login = () => {
               </Link>
             </button>
             <button className="relative text-center pl-4 pr-4 pt-1 pb-1 m-1 mb-2 hover:scale-105 active:scale-110 text-white z-50 bg-yellow-900 shadow-gray-700 shadow-md hover:bg-yellow-700 bg-opacity-70 rounded-md p-2 text-xs md:text-md lg:text-base">
-              <Link href="/api/auth/login">Login or Sign Up</Link>
+              <a href="/api/auth/login">Login or Sign Up</a>
             </button>
           </div>
         </div>
