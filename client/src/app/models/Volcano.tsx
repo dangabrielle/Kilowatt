@@ -65,7 +65,7 @@ const Volcano = ({ cumulativePercentage }: VolcanoProps) => {
     position: isTilted ? handlePosition(cumulativePercentage) : [0, 0, 0],
     rotation: isTilted ? handleRotation(cumulativePercentage) : [0, 0, 0], // Tilts 30 degrees on X-axis when `isTilted` is true
     config: {
-      duration: 5000,
+      duration: 3000,
       easing: easings.easeInOutCubic,
     },
   });
