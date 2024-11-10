@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { socket } from "../../socket";
 import { Canvas } from "@react-three/fiber";
 import Volcano from "../models/Volcano";
-import { OrbitControls } from "@react-three/drei";
 import AirConditionerScene from "../components/AirConditionerScene";
 import RefrigeratorScene from "../components/RefrigeratorScene";
 import CeilingFanScene from "../components/CeilingFanScene";
