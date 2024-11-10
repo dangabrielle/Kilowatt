@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Island from "../models/Island";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
