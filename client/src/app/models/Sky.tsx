@@ -10,16 +10,17 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three/src/Three.js";
+import * as THREE from "three";
 
-const Sky = (props: any) => {
+const Sky = () => {
   const { nodes, materials } = useGLTF("/sky.glb");
-  const ref: any = useRef();
+  const ref = useRef<THREE.Group>(null!);
 
   useFrame(() => {
     ref.current.rotation.y += 0.0005;
   });
   return (
-    <group {...props} dispose={null} ref={ref}>
+    <group dispose={null} ref={ref}>
       <group scale={0.01}>
         <mesh
           castShadow
