@@ -14,7 +14,6 @@ import PorchLightScene from "../components/PorchLightScene";
 import CeilingLightScene from "../components/CeilingLightScene";
 import Sky from "../models/Sky";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 
 const GaugeComponent = dynamic(() => import("react-gauge-component"), {
   ssr: false,
