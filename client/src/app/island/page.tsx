@@ -32,8 +32,6 @@ type ApplianceStatus = {
 };
 
 export default function Home() {
-  const [isConnected, setIsConnected] = useState(false);
-  const [transport, setTransport] = useState("N/A");
   const [cumulativePercentage, setCumulativePercentage] = useState(0);
   const [textBubble, setTextBubble] = useState("");
 
@@ -72,34 +70,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (socket.connected) {
-      onConnect();
-    }
-
-    function onConnect() {
-      setIsConnected(true);
-      setTransport(socket.io.engine.transport.name);
-
-      socket.io.engine.on("upgrade", (transport) => {
-        setTransport(transport.name);
-      });
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-      setTransport("N/A");
-    }
-
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-
     socket.on("applianceStatuses", (data) => {
       setApplianceStatus(data);
     });
     return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-      socket.off("ac unit");
+      socket.off("applianceStatuses");
     };
   }, []);
 
