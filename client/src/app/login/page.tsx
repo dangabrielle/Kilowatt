@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import Volcano from "../models/Volcano";
