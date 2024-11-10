@@ -83,7 +83,7 @@ client.on("connect", () => {
 // WebsocketIO connection
 const io = socketIo(server, {
   cors: {
-    origin: process.env.URL,
+    origin: "https://kilowatt-hacc24.vercel.app/",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   },
