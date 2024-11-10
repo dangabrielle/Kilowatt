@@ -1,13 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import Volcano from "../models/Volcano";
 import Sky from "../models/Sky";
 import Link from "next/link";
+import { OrbitControls } from "@react-three/drei";
 
 const login = () => {
+  const audioPlayback = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    audioPlayback.current?.play();
+  }, []);
+
   return (
     <>
       <div className="h-screen w-full flex flex-col items-center">
@@ -39,6 +46,7 @@ const login = () => {
                 <directionalLight position={[5, 10, 5]} intensity={2} />
                 <Volcano cumulativePercentage={0} />
               </group>
+              <OrbitControls />
             </Suspense>
           </Canvas>
         </div>
