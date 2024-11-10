@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import ProgressBar from "./ProgressBar";
 import CeilingLight from "../models/CeilingLight";
-import { OrbitControls } from "@react-three/drei";
 import { ApplianceSceneProps } from "../../../types";
 import { Suspense } from "react";
 
