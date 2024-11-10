@@ -115,10 +115,12 @@ body {
   animation: float 5s ease-in-out infinite;
   color: var(--color-brown);
   background-color: var(--color-beige);
-  padding: 20px;
+  padding: 30px;
   border-radius: 40px;
   position: relative;
   box-shadow: 10px 8px var(--color-blue);
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .floatText::after {
