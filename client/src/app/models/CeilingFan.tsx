@@ -33,5 +33,4 @@ const CeilingFan = ({ status }: applianceStatusProps) => {
   );
 };
 
-useGLTF.preload("/stylized_ceiling_fan.glb");
 export default CeilingFan;
