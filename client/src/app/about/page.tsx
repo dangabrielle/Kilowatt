@@ -8,14 +8,14 @@ import Sky from "../models/Sky";
 const about = () => {
   return (
     <div className="h-screen w-screen flex flex-row items-center justify-center">
-      <div className="relative flex flex-col items-center justify-center z-10 mr-auto -mt-5 sm:ml-0 md:ml-20 lg:ml-48 sm:w-full md:w-1/2 lg:w-2/5 h-3/5 m-10 floatTextAbout text-center overflow-auto">
+      <div className="relative flex flex-col items-center justify-center z-10 mr-auto -mt-5 sm:ml-0 md:ml-20 lg:ml-48 sm:w-full md:w-4/5 lg:w-2/5  h-3/5 m-10 floatTextAbout text-center overflow-auto">
         <h1 className="sm:text-xl md:text-2xl lg:text-3xl break-words">
           HAWAI&apos;I HACKATHON 2024
         </h1>
         <h2 className="sm:text-lg md:text-xl lg:text-2xl p-0.5 italic break-words">
           Hawai&apos;i Keiki Museum Challenge
         </h2>
-        <p className="p-3 sm:text-xs md:text-base lg:text-lg break-words">
+        <p className="p-3 text-sm md:text-base 2xl:text-lg break-words overflow-hidden max-w-full text-center">
           Aloha and welcome to Kilowatt Island Surge! -- an energy visualization
           application designed for Hawai&apos;i keiki to learn about energy
           consumption in a typical household. This is a proof of concept
@@ -25,7 +25,7 @@ const about = () => {
           project is to educate children to conserve as much energy as possible
           by keeping our appliances off when not in use.
         </p>
-        <p className="p-3 sm:text-xs md:text-base lg:text-lg ">
+        <p className="p-3 text-sm md:text-base 2xl:text-lg break-words overflow-hidden max-w-full text-center">
           In this prototype, kids are taken to an island where their main goal
           is to keep it afloat! They can turn on an appliance (i.e, AC,
           refrigerator, ceiling light), see how much energy is being used up
