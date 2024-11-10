@@ -20,7 +20,7 @@ const Volcano = ({ cumulativePercentage }: VolcanoProps) => {
   const [isTilted, setIsTilted] = useState(false);
   const { nodes, materials } = useGLTF("/volcano_island_lowpoly.glb");
 
-  const ref: any = useRef();
+  const ref = useRef<THREE.Group>(null!);
 
   useEffect(() => {
     if (cumulativePercentage > 50) {

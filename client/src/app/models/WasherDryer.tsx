@@ -6,11 +6,15 @@ Source: https://sketchfab.com/3d-models/mielewasheranddryer-5688602a90504ea2aff1
 Title: Miele+washer+and+dryer
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
 
-const WasherDryer = ({ status }) => {
+interface applianceStatusProps {
+  status: boolean;
+}
+
+const WasherDryer = ({ status }: applianceStatusProps) => {
   const { scene } = useGLTF("/mielewasheranddryer.glb");
 
   const { rotation } = useSpring({
@@ -21,7 +25,11 @@ const WasherDryer = ({ status }) => {
   });
 
   return (
-    <a.mesh rotation={rotation}>
+    <a.mesh
+      rotation-x={rotation.to((x) => x)}
+      rotation-y={rotation.to((_, y) => y)}
+      rotation-z={rotation.to((_, __, z) => z)}
+    >
       <primitive object={scene} />
     </a.mesh>
   );
