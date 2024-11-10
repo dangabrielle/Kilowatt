@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/ge-profile-double-oven-electric-range-e2
 Title: GE Profile Double Oven Electric Range
 */
 
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
 
