@@ -6,9 +6,7 @@ Source: https://sketchfab.com/3d-models/litle-floating-island-in-low-poly-96bf4e
 Title: Litle floating island in low poly
 */
 
-// "use client";
-
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { a, useSpring, easings } from "@react-spring/three";
 
