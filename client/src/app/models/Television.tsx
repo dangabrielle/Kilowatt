@@ -36,5 +36,4 @@ const Television = ({ status }: applianceStatusProps) => {
   );
 };
 
-useGLTF.preload("/tv__glass_table_sketchfab.glb");
 export default Television;
