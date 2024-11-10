@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/tv-glass-table-sketchfab-40ca38263bcd413
 Title: TV & Glass Table Sketchfab
 */
 
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
 
