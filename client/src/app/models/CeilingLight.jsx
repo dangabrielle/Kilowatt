@@ -26,7 +26,7 @@ const CeilingLight = ({ status }) => {
   useEffect(() => {
     if (bulbMaterial) {
       if (status) {
-        bulbMaterial.emissive = new THREE.Color(1, 1, 0); // Yellow light
+        bulbMaterial.emissive = new THREE.Color(1, 1, 0);
         bulbMaterial.emissiveIntensity = 1;
       } else {
         bulbMaterial.emissiveIntensity = 0;
