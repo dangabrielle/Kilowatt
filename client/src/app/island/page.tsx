@@ -330,11 +330,10 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="w-2/5 h-1/2 mt-14 mr-10 -ml-16 flex items-center justify-center floatText">
-              <div className="m-10 sm:text-s md:text-base lg:text-lg 2xl:text-2xl text-center">
+            <div className="w-2/5 h-1/2 mt-14 mr-10 -ml-16 flex flex-row flex-1 items-center justify-center floatText">
+              <p className="sm:text-xs md:text-base lg:text-lg 2xl:text-2xl break-words overflow-hidden max-w-full text-center">
                 {textBubble}
-                {/* <a href="/api/auth/login">Login</a> */}
-              </div>
+              </p>
             </div>
           </div>
           <div className="h-full w-full z-0">
