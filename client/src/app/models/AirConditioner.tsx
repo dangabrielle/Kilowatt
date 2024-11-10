@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/air-conditioning-system-d1367b53a8f541b3
 Title: air conditioning system
 */
 
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 interface applianceStatusProps {
@@ -25,7 +25,7 @@ const AirConditioner = ({ status }: applianceStatusProps) => {
     } else {
       actions["Cylinder.003Action"]?.stop();
     }
-  }, [status]);
+  }, [status, actions]);
 
   return (
     <mesh>
