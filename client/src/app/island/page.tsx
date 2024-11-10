@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense } from "react";
+import React, { Suspense, useRef } from "react";
 import { useState, useEffect } from "react";
 import { socket } from "../../socket";
 import { Canvas } from "@react-three/fiber";
@@ -12,8 +12,10 @@ import TelevisionScene from "../components/TelevisionScene";
 import WasherDryerScene from "../components/WasherDryerScene";
 import PorchLightScene from "../components/PorchLightScene";
 import CeilingLightScene from "../components/CeilingLightScene";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import Sky from "../models/Sky";
 import dynamic from "next/dynamic";
+import { OrbitControls } from "@react-three/drei";
 
 const GaugeComponent = dynamic(() => import("react-gauge-component"), {
   ssr: false,
@@ -33,6 +35,10 @@ type ApplianceStatus = {
 export default function Home() {
   const [cumulativePercentage, setCumulativePercentage] = useState(0);
   const [textBubble, setTextBubble] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const { user } = useUser();
+  const audioPlayback = useRef<HTMLAudioElement>(null);
+  const sinkAudioRef = useRef<HTMLAudioElement>(null);
 
   const [percentage, setPercentage] = useState({
     ac: 0,
@@ -120,6 +126,23 @@ export default function Home() {
       }
     };
 
+    if (cumulativePercentage === 51) {
+      setTimeout(() => {
+        sinkAudioRef.current?.play();
+      }, 1000);
+    } else if (cumulativePercentage === 61) {
+      sinkAudioRef.current?.play();
+    } else if (cumulativePercentage === 70) {
+      sinkAudioRef.current?.play();
+    } else if (cumulativePercentage === 86) {
+      sinkAudioRef.current?.play();
+    } else if (cumulativePercentage === 90) {
+      sinkAudioRef.current?.play();
+    } else if (cumulativePercentage === 100) {
+      setTimeout(() => {
+        sinkAudioRef.current?.play();
+      }, 1000);
+    }
     handleText(cumulativePercentage);
   }, [cumulativePercentage]);
 
@@ -131,6 +154,24 @@ export default function Home() {
     setCumulativePercentage(Math.round((currentSum / total) * 100));
     console.log(cumulativePercentage);
   }, [percentage]);
+
+  const handlePlay = () => {
+    if (!isPlaying) {
+      audioPlayback.current?.play();
+      setIsPlaying(true);
+    } else {
+      audioPlayback.current?.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (cumulativePercentage === 100 && sinkAudioRef.current) {
+  //     sinkAudioRef.current.play().catch(error => {
+  //       console.error("Sink audio playback failed:", error);
+  //     });
+  //   }
+  // }, [cumulativePercentage]);
 
   return (
     <>
@@ -260,8 +301,21 @@ export default function Home() {
         </div>
 
         <div className="relative w-3/5 h-screen">
-          <div className="absolute top-5 right-10 z-50 bg-neutral-200 shadow-md  hover:scale-105 hover:bg-orange-200 hover:bg-opacity-70 active:scale-110 active:bg-orange-200 shadow-gray-500 text-rose-950 bg-opacity-80 p-1 pr-3 pl-3 rounded-2xl">
-            <button>
+          <div className="absolute top-5 flex flex-row right-10 items-center z-50">
+            <div className="mr-5 text-amber-950">
+              {user && `Aloha, ${user.nickname}!`}
+            </div>
+            <button
+              onClick={handlePlay}
+              className={`bg-neutral-200 shadow-md mr-5 hover:scale-105 hover:bg-emerald-300 hover:bg-opacity-70 active:scale-110 active:bg-emerald-400 shadow-gray-500 ${
+                isPlaying ? "bg-emerald-300 bg-opacity-80" : "bg-opacity-10"
+              } p-1 pr-3 pl-3 rounded-2xl`}
+            >
+              🎵
+            </button>
+            <audio ref={audioPlayback} src="/island_bgmusic.mp3" loop />
+            <audio ref={sinkAudioRef} src="/whistle_down.mp3" />
+            <button className=" bg-neutral-200 shadow-md  hover:scale-105 hover:bg-orange-200 hover:bg-opacity-70 active:scale-110 active:bg-orange-200 shadow-gray-500 text-rose-950 bg-opacity-80 p-1 pr-3 pl-3 rounded-2xl">
               <a href="/api/auth/logout">Logout</a>
             </button>
           </div>
@@ -350,6 +404,7 @@ export default function Home() {
                   <directionalLight position={[5, 10, 5]} intensity={2} />
                   <Volcano cumulativePercentage={cumulativePercentage} />
                 </group>
+                <OrbitControls />
               </Suspense>
             </Canvas>
           </div>
