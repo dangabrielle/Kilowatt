@@ -9,6 +9,10 @@ Kilowatt Island Surge is an arduino compatible web application designed to educa
 
 Within the playhouse, keiki can switch appliances (TV, AC, ceiling fan, electric oven, etc.) <u>**_on or off_**<u> to visualize how much energy is consumed per second for each appliance. <u>**_But here's the catch_**<u> -- if they leave the appliances on for too long (once maximum capacity is reached for the day), the island will <u>**_sink_**<u>. From there, they are prompted to turn the appliances off to conserve energy and bring their island back afloat. This encourages children to not only learn about the concept of energy and power, but to also be mindful of the impact overconsumption can have to our environment.
 
+[Check it out here!](https://kilowatt-hacc24.vercel.app/)
+<img src="/client/public/app_img1.png" width="250" />
+<img src="/client/public/app_img2.png" width="250" />
+
 ## Technology Stack
 
 ### Client: Next.js hosted on Vercel
