@@ -16,6 +16,10 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import Sky from "../models/Sky";
 import dynamic from "next/dynamic";
 import { OrbitControls } from "@react-three/drei";
+const Loader = dynamic(
+  () => import("@react-three/drei").then((mod) => mod.Loader),
+  { ssr: false }
+);
 
 const GaugeComponent = dynamic(() => import("react-gauge-component"), {
   ssr: false,
@@ -69,7 +73,7 @@ export default function Home() {
     ceilingFan: 2.67,
     oven: 28.08,
     tv: 17.25,
-    washerDryer: 64.08,
+    washerDryer: 34.63, // avg washer + dryer usage per month
     porchLight: 18.25,
     ceilingLight: 58.17,
   };
@@ -164,14 +168,6 @@ export default function Home() {
       setIsPlaying(false);
     }
   };
-
-  // useEffect(() => {
-  //   if (cumulativePercentage === 100 && sinkAudioRef.current) {
-  //     sinkAudioRef.current.play().catch(error => {
-  //       console.error("Sink audio playback failed:", error);
-  //     });
-  //   }
-  // }, [cumulativePercentage]);
 
   return (
     <>
@@ -409,6 +405,7 @@ export default function Home() {
             </Canvas>
           </div>
         </div>
+        <Loader />
       </div>
     </>
   );

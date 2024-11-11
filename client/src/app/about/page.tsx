@@ -4,6 +4,11 @@ import Island from "../models/Island";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import Sky from "../models/Sky";
+import dynamic from "next/dynamic";
+const Loader = dynamic(
+  () => import("@react-three/drei").then((mod) => mod.Loader),
+  { ssr: false }
+);
 
 const about = () => {
   return (
@@ -53,6 +58,7 @@ const about = () => {
             </group>
           </Suspense>
         </Canvas>
+        <Loader />
       </div>
     </div>
   );

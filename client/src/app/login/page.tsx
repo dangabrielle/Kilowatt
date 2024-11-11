@@ -7,6 +7,11 @@ import Volcano from "../models/Volcano";
 import Sky from "../models/Sky";
 import Link from "next/link";
 import { OrbitControls } from "@react-three/drei";
+import dynamic from "next/dynamic";
+const Loader = dynamic(
+  () => import("@react-three/drei").then((mod) => mod.Loader),
+  { ssr: false }
+);
 
 const login = () => {
   return (
@@ -43,6 +48,7 @@ const login = () => {
               <OrbitControls />
             </Suspense>
           </Canvas>
+          <Loader />
         </div>
       </div>
     </>

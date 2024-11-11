@@ -39,6 +39,7 @@ const AirConditionerScene = ({
             </group>
           </Suspense>
         </Canvas>
+
         <div>
           <p className="sm:text-xs md:text-sm 2xl:text-base -mt-5 text-center">
             Air Conditioner {text}

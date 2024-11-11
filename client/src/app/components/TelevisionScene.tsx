@@ -38,6 +38,7 @@ const TelevisionScene = ({
             </group>
           </Suspense>
         </Canvas>
+
         <div className="sm:text-xs md:text-sm 2xl:text-base -mt-2 text-center">
           <p>TV {text}</p>
         </div>
