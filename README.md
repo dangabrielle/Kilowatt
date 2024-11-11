@@ -18,8 +18,8 @@ Login credentials:
 - Password: Hawaiihac24!
 
 IMPORTANT: Since this application is arduino compatible, an MQTT testing software (MQTTX) is used to simulate appliances being turned on and off. Please view the demo video (as part of the hacc submission) to grasp how it works. Feel free to reach out through slack if a live demo is needed. <br /> <br />
-<img src="/client/public/app_img1.png" width="700" />
-<img src="/client/public/app_img2.png" width="700" />
+<img src="/client/public/app_img1.png" width="100%" />
+<img src="/client/public/app_img2.png" width="100%" />
 
 ## Technology Stack
 
