@@ -17,7 +17,7 @@ const login = () => {
   return (
     <>
       <div className="h-screen w-full flex flex-col items-center">
-        <div className="absolute z-10 w-1/3 h-2/5 pt-16">
+        <div className="absolute z-10 flex flex-col justify-center sm:h-1/3 sm:w-1/3 pt-16">
           <div className="relative flex flex-col items-center z-50 text-center sm:text-s md:text-base lg:text-lg xl:text-xl 2xl:text-2xl floatText">
             <h1>HAWAI&apos;I HACKATHON 2024</h1>
             <h1>Hawai&apos;i Keiki Museum Challenge</h1>
