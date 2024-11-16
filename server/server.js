@@ -94,6 +94,15 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("Websocket client disconnected");
+    // reset appliance statuses if disconnected
+    applianceStatuses.ac = false;
+    applianceStatuses.ceilingFan = false;
+    applianceStatuses.ceilingLight = false;
+    applianceStatuses.oven = false;
+    applianceStatuses.porchLight = false;
+    applianceStatuses.refrigerator = false;
+    applianceStatuses.tv = false;
+    applianceStatuses.washerDryer = false;
   });
 });
 
@@ -115,8 +124,10 @@ client.on("message", async (topic, payload) => {
     applianceStatuses.porchLight = status;
   } else if (topic === washerDryerTopic) {
     applianceStatuses.washerDryer = status;
-  } else {
+  } else if (topic === ceilingLightTopic) {
     applianceStatuses.ceilingLight = status;
+  } else {
+    console.error(`Unknown topic: ${topic}`);
   }
 
   io.emit("applianceStatuses", applianceStatuses);
