@@ -13,7 +13,7 @@ const Loader = dynamic(
 const about = () => {
   return (
     <div className="h-screen w-screen flex flex-row items-center justify-center">
-      <div className="relative flex flex-col items-center justify-center z-10 m-10 md:w-2/5 md:mr-auto md:ml-48 floatTextAbout text-center">
+      <div className="relative flex flex-col items-center justify-center z-10 m-10 lg:w-2/5 lg:mr-auto lg:ml-48 floatTextAbout text-center">
         <h1 className="sm:text-xl md:text-2xl lg:text-3xl break-words">
           HAWAI&apos;I HACKATHON 2024
         </h1>
