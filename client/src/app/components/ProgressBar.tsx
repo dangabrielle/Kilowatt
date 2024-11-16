@@ -10,8 +10,8 @@ const ProgressBar = ({
   const [progress, setProgress] = useState(0);
   const dailyKWh = monthlyKWh / 30;
   const secondsInDay = 24 * 3600;
-  const energyRatePerSecond = (dailyKWh / secondsInDay) * 1000;
-  console.log(energyRatePerSecond);
+  const energyRatePerSecond = (dailyKWh / secondsInDay) * 3000;
+
   useEffect(() => {
     if (!status) {
       if (progress != dailyKWh) {
