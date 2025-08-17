@@ -1,4 +1,4 @@
-# KILOWATT ISLAND SURGE
+# 1st Place and People's Choice Winner: KILOWATT ISLAND SURGE
 
 HAWAI'I HACKATHON 2024 <br />
 <em>Gabrielle Dang</em>
